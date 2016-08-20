@@ -64,6 +64,7 @@ nmap <F8> :TagbarToggle<CR>
 " Syntastic
 let g:syntastic_php_checkers = ['php','phpcs']
 let g:syntastic_php_phpcs_args = "--standard=PSR2 -n --report=csv"
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
