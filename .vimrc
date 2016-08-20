@@ -15,6 +15,9 @@ set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
 set guioptions-=T                 " Hide toolbar.
 set lines=80 columns=200          " Window dimensions.
+set expandtab
+set shiftwidth=4
+set softtabstop=4
 
 filetype plugin indent on  " required!
 
@@ -42,11 +45,12 @@ Plugin 'altercation/vim-colors-solarized'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Airliner
+" Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
