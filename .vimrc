@@ -73,8 +73,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-"NERDTree
+" NERDTree
 nmap <leader>ne :NERDTree<cr>
 nmap <leader>nec :NERDTreeClose<cr>
 map <silent> <C-n> :NERDTreeFocus<CR>
 
+" Buffer next and previous
+noremap <C-n> :bn<CR>
+noremap <C-b> :bp<CR>
