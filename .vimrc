@@ -37,6 +37,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mileszs/ack.vim'
+Plugin 'beanworks/vim-phpfmt'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,3 +79,7 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 " Buffer next and previous
 nmap <leader>b :bn<CR>
 nmap <leader>n :bp<CR>
+
+" vim-phpfmt
+let g:phpfmt_standard = 'PSR2'
+let g:phpfmt_command = '/usr/local/bin/phpcbf'
