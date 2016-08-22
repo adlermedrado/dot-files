@@ -27,10 +27,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -40,6 +36,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -79,5 +76,5 @@ nmap <leader>nec :NERDTreeClose<cr>
 map <silent> <C-n> :NERDTreeFocus<CR>
 
 " Buffer next and previous
-noremap <C-n> :bn<CR>
-noremap <C-b> :bp<CR>
+nmap <leader>b :bn<CR>
+nmap <leader>n :bp<CR>
