@@ -18,6 +18,9 @@ set lines=80 columns=200          " Window dimensions.
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh','php']
+let g:markdown_syntax_conceal = 0
 
 filetype plugin indent on  " required!
 
@@ -39,6 +42,7 @@ Plugin 'beanworks/vim-phpfmt'
 Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'klen/python-mode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
