@@ -5,7 +5,7 @@ syntax on
 let mapleader=","
 set laststatus=2
 set ruler
-set number
+set nonumber
 set showcmd
 set background=dark
 set anti enc=utf-8
@@ -21,6 +21,7 @@ set softtabstop=4
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh','php']
 let g:markdown_syntax_conceal = 0
+set backspace=indent,eol,start
 
 filetype plugin indent on  " required!
 
@@ -63,7 +64,8 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
