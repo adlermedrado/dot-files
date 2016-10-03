@@ -18,6 +18,17 @@ set lines=80 columns=200          " Window dimensions.
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set textwidth=0 nowrap
+set visualbell              " Set visual bell
+set foldmethod=indent       " Folding method: indent
+set foldlevel=99            " Initial Fold Level
+set clipboard=unnamed
+
+" CTRL+[hjkl] navigation between buffers
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 filetype plugin indent on  " required!
 
