@@ -30,6 +30,10 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" Moving .swp files away
+set backupdir=~/.vim
+set directory=~/.vim
+
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh','php']
 let g:markdown_syntax_conceal = 0
