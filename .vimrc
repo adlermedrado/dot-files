@@ -5,7 +5,7 @@ syntax on
 let mapleader=","
 set laststatus=2
 set ruler
-set number
+set nonumber
 set showcmd
 set background=dark
 set anti enc=utf-8
@@ -30,6 +30,11 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh','php']
+let g:markdown_syntax_conceal = 0
+set backspace=indent,eol,start
+
 filetype plugin indent on  " required!
 
 " set the runtime path to include Vundle and initialize
@@ -50,6 +55,7 @@ Plugin 'beanworks/vim-phpfmt'
 Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'klen/python-mode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -70,7 +76,8 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
