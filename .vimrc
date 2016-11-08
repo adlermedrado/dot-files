@@ -41,6 +41,10 @@ set backspace=indent,eol,start
 
 filetype plugin indent on  " required!
 
+" requires xmllint
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
