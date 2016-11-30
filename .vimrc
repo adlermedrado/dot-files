@@ -117,3 +117,6 @@ nmap <leader>n :bp<CR>
 " vim-phpfmt
 let g:phpfmt_standard = 'PSR2'
 let g:phpfmt_command = '/usr/local/bin/phpcbf'
+
+" Redraw screen on save
+au BufWritePost * :redraw!
