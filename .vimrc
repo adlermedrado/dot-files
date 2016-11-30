@@ -23,6 +23,7 @@ set visualbell              " Set visual bell
 set foldmethod=indent       " Folding method: indent
 set foldlevel=99            " Initial Fold Level
 set clipboard=unnamed
+set colorcolumn=180
 
 " CTRL+[hjkl] navigation between buffers
 map <c-j> <c-w>j
@@ -35,6 +36,8 @@ set backupdir=~/.vim
 set directory=~/.vim
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufRead *.py setlocal colorcolumn=0
+
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh','php']
 let g:markdown_syntax_conceal = 0
 set backspace=indent,eol,start
@@ -63,7 +66,6 @@ Plugin 'beanworks/vim-phpfmt'
 Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'klen/python-mode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,6 +96,7 @@ nmap <F8> :TagbarToggle<CR>
 let g:syntastic_php_checkers = ['php','phpcs']
 let g:syntastic_php_phpcs_args = "--standard=PSR2 -n --report=csv"
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+let g:syntastic_python_checkers = ['flake8']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
