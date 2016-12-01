@@ -25,12 +25,6 @@ set foldlevel=99            " Initial Fold Level
 set clipboard=unnamed
 set colorcolumn=180
 
-" CTRL+[hjkl] navigation between buffers
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-
 " Moving .swp files away
 set backupdir=~/.vim
 set directory=~/.vim
@@ -88,6 +82,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+map <C-C> :CtrlPBuffer<CR>
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
