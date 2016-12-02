@@ -66,6 +66,7 @@ Plugin 'beanworks/vim-phpfmt'
 Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'crusoexia/vim-dracula'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -120,3 +121,4 @@ let g:phpfmt_command = '/usr/local/bin/phpcbf'
 
 " Redraw screen on save
 au BufWritePost * :redraw!
+colo dracula
