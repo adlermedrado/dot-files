@@ -75,7 +75,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme="dark"
 
 " Statusline Git
-" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set statusline=%{fugitive#statusline()}
 
 " CtrlP
