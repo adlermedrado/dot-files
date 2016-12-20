@@ -24,6 +24,8 @@ set foldmethod=indent       " Folding method: indent
 set foldlevel=99            " Initial Fold Level
 set clipboard=unnamed
 set colorcolumn=180
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set list
 
 " Moving .swp files away
 set backupdir=~/.vim
@@ -60,7 +62,7 @@ Plugin 'beanworks/vim-phpfmt'
 Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'crusoexia/vim-dracula'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -116,4 +118,4 @@ let g:phpfmt_command = '/usr/local/bin/phpcbf'
 
 " Redraw screen on save
 au BufWritePost * :redraw!
-colo dracula
+set bg=dark
