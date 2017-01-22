@@ -25,7 +25,6 @@ set foldlevel=99            " Initial Fold Level
 set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-set list
 
 " Moving .swp files away
 set backupdir=~/.vim
