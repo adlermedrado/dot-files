@@ -1,5 +1,6 @@
 "General Settings
 set nocompatible              " be iMproved, required
+set shell=/bin/bash
 filetype off                  " required
 syntax on
 let mapleader=","
@@ -10,7 +11,6 @@ set showcmd
 set background=dark
 set anti enc=utf-8
 set linespace=2
-set guifont=Source\ Code\ Pro\ Light:h16 " Font family and font size.
 set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
 set guioptions-=T                 " Hide toolbar.
@@ -25,6 +25,8 @@ set foldlevel=99            " Initial Fold Level
 set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set term=screen-256color
+set guifont=Inconsolata:h16 " Font family and font size.
 
 " Moving .swp files away
 set backupdir=~/.vim
@@ -84,7 +86,8 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-map <C-C> :CtrlPBuffer<CR>
+map <leader>p :CtrlP<cr>
+nnoremap <leader>. :CtrlPTag<cr>
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -103,13 +106,18 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " NERDTree
-nmap <leader>ne :NERDTree<cr>
-nmap <leader>nec :NERDTreeClose<cr>
-map <silent> <C-n> :NERDTreeFocus<CR>
+" Toggle nerdtree with F10
+map <F10> :NERDTreeToggle<CR>
+
+" Current file in nerdtree
+map <F9> :NERDTreeFind<CR>
+
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Buffer next and previous
-nmap <leader>b :bn<CR>
-nmap <leader>n :bp<CR>
+nmap <leader>b :bp<CR>
+nmap <leader>n :bn<CR>
 
 " vim-phpfmt
 let g:phpfmt_standard = 'PSR2'
@@ -117,4 +125,10 @@ let g:phpfmt_command = '/usr/local/bin/phpcbf'
 
 " Redraw screen on save
 au BufWritePost * :redraw!
+
+" Autoclose YCM helper window after user
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" colorscheme
+set t_Co=32
 set bg=dark
