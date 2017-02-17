@@ -46,6 +46,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'craigemery/vim-autotag'
 
 " All of your Plugins must be added before the following line
 
@@ -88,3 +90,6 @@ nnoremap <leader>ç :CtrlPTag<cr>
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" Ignore line width for syntax checking
+let g:syntastic_python_checker_args='--ignore=E501'
