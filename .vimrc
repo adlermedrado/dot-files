@@ -92,4 +92,5 @@ nnoremap <leader>ç :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
 
 " Ignore line width for syntax checking
+let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_checker_args='--ignore=E501'
