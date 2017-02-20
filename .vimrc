@@ -48,7 +48,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'craigemery/vim-autotag'
-
+Plugin 'valloric/youcompleteme'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
