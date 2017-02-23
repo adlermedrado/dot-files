@@ -1,6 +1,5 @@
 "General Settings
 set nocompatible              " be iMproved, required
-set shell=/bin/bash
 filetype off                  " required
 syntax on
 let mapleader=","
@@ -10,9 +9,7 @@ set ruler
 set nonumber
 set showcmd
 set background=dark
-set anti enc=utf-8
 set linespace=2
-set antialias                     " MacVim: smooth fonts.
 set encoding=utf-8                " Use UTF-8 everywhere.
 set guioptions-=T                 " Hide toolbar.
 set lines=80 columns=200          " Window dimensions.
@@ -21,13 +18,18 @@ set shiftwidth=4
 set softtabstop=4
 set textwidth=0 nowrap
 set visualbell              " Set visual bell
-set foldmethod=indent       " Folding method: indent
-set foldlevel=99            " Initial Fold Level
+set foldmethod=marker
+set foldenable
+set foldlevel=0           
+set foldnestmax=2
 set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set term=screen-256color
+set foldlevelstart=99
 
+" Set autopep8 for python files
+au FileType python setlocal formatprg=autopep8\ -
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -46,9 +48,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
 Plugin 'craigemery/vim-autotag'
-Plugin 'valloric/youcompleteme'
+Plugin 'shougo/neocomplete.vim'
+Plugin 'tmhedberg/simpylfold'
+Plugin 'mileszs/ack.vim'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -74,7 +77,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme="light"
+let g:airline_theme="luna"
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
@@ -94,3 +97,33 @@ nmap <F8> :TagbarToggle<CR>
 " Ignore line width for syntax checking
 let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_checker_args='--ignore=E501'
+
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 1
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+" Enable omni completion.
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
