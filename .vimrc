@@ -11,7 +11,6 @@ set showcmd
 set background=dark
 set linespace=2
 set encoding=utf-8                " Use UTF-8 everywhere.
-set guioptions-=T                 " Hide toolbar.
 set lines=80 columns=200          " Window dimensions.
 set expandtab
 set shiftwidth=4
@@ -21,12 +20,10 @@ set visualbell              " Set visual bell
 set foldmethod=marker
 set foldenable
 set foldlevel=0           
-set foldnestmax=2
+set foldnestmax=5
 set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-set term=screen-256color
-set foldlevelstart=99
 
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
@@ -126,4 +123,3 @@ let g:neocomplete#enable_auto_select = 1
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
