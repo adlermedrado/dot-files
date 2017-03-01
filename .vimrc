@@ -19,11 +19,12 @@ set textwidth=0 nowrap
 set visualbell              " Set visual bell
 set foldmethod=marker
 set foldenable
-set foldlevel=0           
-set foldnestmax=5
+set foldlevel=5           
+set foldnestmax=1
 set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set guifont=Inconsolata\ 16
 
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
@@ -57,11 +58,11 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " NERDTree
-" Toggle nerdtree with F10
-map <F10> :NERDTreeToggle<CR>
+" Toggle nerdtree with F7
+map <F7> :NERDTreeToggle<CR>
 
 " Current file in nerdtree
-map <F9> :NERDTreeFind<CR>
+map <F6> :NERDTreeFind<CR>
 
 " Buffer next and previous
 nmap <leader>, :bp<CR>
