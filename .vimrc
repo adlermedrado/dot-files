@@ -25,6 +25,7 @@ set clipboard=unnamed
 set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set guifont=Inconsolata\ 16
+set backspace=start,eol,indent
 
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
