@@ -22,10 +22,15 @@ set foldenable
 set foldlevel=5           
 set foldnestmax=1
 set clipboard=unnamed
-set colorcolumn=180
+"set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set guifont=Inconsolata\ 16
 set backspace=start,eol,indent
+let colorcolum=join(range(99,999), ",") 
+hi ColorColumn guibg=#2d2d2d ctermbg=235
+set cursorline
+set fillchars=vert:\|
+set nowrap
 
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
