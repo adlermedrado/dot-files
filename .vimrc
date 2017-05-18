@@ -30,7 +30,6 @@ set cursorline
 set fillchars=vert:\|
 set nowrap
 set clipboard=unnamed,unnamedplus
-set paste               " Paste from a windows or from vim
 set go+=a               " Visual selection automatically copied to the clipboard
 set number
 set showcmd
