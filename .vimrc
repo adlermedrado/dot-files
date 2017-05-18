@@ -21,8 +21,6 @@ set foldmethod=marker
 set foldenable
 set foldlevel=5           
 set foldnestmax=1
-set clipboard=unnamed
-"set colorcolumn=180
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set guifont=Inconsolata\ 16
 set backspace=start,eol,indent
@@ -31,6 +29,18 @@ hi ColorColumn guibg=#2d2d2d ctermbg=235
 set cursorline
 set fillchars=vert:\|
 set nowrap
+set clipboard=unnamed,unnamedplus
+set paste               " Paste from a windows or from vim
+set go+=a               " Visual selection automatically copied to the clipboard
+set number
+set showcmd
+set cursorline
+set so=7
+set wildmenu
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+set ruler
+set cmdheight=1
+set hid
 
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
@@ -56,6 +66,7 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
+Plugin 'ryanoasis/vim-devicons'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -81,7 +92,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme="luna"
+let g:airline_theme="aurora"
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
@@ -123,6 +134,12 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" Disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
