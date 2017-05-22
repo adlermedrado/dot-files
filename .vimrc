@@ -30,7 +30,6 @@ set cursorline
 set fillchars=vert:\|
 set nowrap
 set clipboard=unnamed,unnamedplus
-set paste               " Paste from a windows or from vim
 set go+=a               " Visual selection automatically copied to the clipboard
 set number
 set showcmd
@@ -136,10 +135,10 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
