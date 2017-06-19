@@ -66,6 +66,7 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'rakr/vim-one'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -91,8 +92,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme="aurora"
-
+let g:airline_theme='bubblegum'
 " Statusline Git
 set statusline=%{fugitive#statusline()}
 
