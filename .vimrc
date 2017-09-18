@@ -41,6 +41,10 @@ set ruler
 set cmdheight=1
 set hid
 
+" Toggle paste mode on/off
+set pastetoggle=<F2>
+
+
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
