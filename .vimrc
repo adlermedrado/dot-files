@@ -70,7 +70,6 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'rakr/vim-one'
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
