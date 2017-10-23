@@ -22,7 +22,7 @@ set foldenable
 set foldlevel=5           
 set foldnestmax=1
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-set guifont=Inconsolata\ 16
+set guifont=Inconsolata\ Nerd\ Font\ Regurar\ 16
 set backspace=start,eol,indent
 let colorcolum=join(range(99,999), ",") 
 hi ColorColumn guibg=#2d2d2d ctermbg=235
@@ -149,3 +149,6 @@ let g:neocomplete#enable_auto_select = 1
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" IPDB abbreviation
+ab IPDB import ipdb; ipdb.set_trace()
