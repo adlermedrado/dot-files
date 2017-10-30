@@ -70,6 +70,7 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
+
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
@@ -152,3 +153,12 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " IPDB abbreviation
 ab IPDB import ipdb; ipdb.set_trace()
+
+" Ack.VundleVim
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
+" Integrate ag with Ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
