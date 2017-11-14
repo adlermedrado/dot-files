@@ -70,6 +70,8 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'dracula/vim'
+Plugin 'trevordmiller/nova-vim'
 
 " All of your Plugins must be added before the following line
 
@@ -85,9 +87,10 @@ map <F7> :NERDTreeToggle<CR>
 " Current file in nerdtree
 map <F6> :NERDTreeFind<CR>
 
-" Buffer next and previous
+" Buffer next, previous and close
 nmap <leader>, :bp<CR>
 nmap <leader>. :bn<CR>
+map <F3> :bd<CR> 
 
 
 " Airline
@@ -113,9 +116,13 @@ nnoremap <leader>ç :CtrlPTag<cr>
 nmap <F8> :TagbarToggle<CR>
 
 " Ignore line width for syntax checking
-let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_python_checker_args='--ignore=E501'
-
+let g:syntastic_enable_signs=0
+let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_highlighting=1
+let g:syntastic_loc_list_height=3
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,E128'
+let g:airline_enable_syntastic = 1
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -162,3 +169,5 @@ nnoremap <Leader>a :Ack!<Space>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+colorscheme dracula
