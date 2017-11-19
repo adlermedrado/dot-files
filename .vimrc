@@ -3,7 +3,6 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax on
 let mapleader=","
-set bg=dark
 set laststatus=2
 set ruler
 set nonumber
@@ -72,9 +71,9 @@ Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'dracula/vim'
 Plugin 'trevordmiller/nova-vim'
+Plugin 'rakr/vim-one'
 
 " All of your Plugins must be added before the following line
-
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -99,7 +98,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme='bubblegum'
+let g:airline_theme='one'
 " Statusline Git
 set statusline=%{fugitive#statusline()}
 
@@ -146,10 +145,10 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " Disable arrow keys
-" noremap <Up> <NOP>
-" noremap <Down> <NOP>
-" noremap <Left> <NOP>
-" noremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
@@ -170,4 +169,5 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-colorscheme dracula
+colorscheme one
+set background=light
