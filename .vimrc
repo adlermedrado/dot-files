@@ -204,7 +204,8 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme='one'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
 " Statusline Git
 set statusline=%{fugitive#statusline()}
 
