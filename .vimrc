@@ -276,7 +276,7 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-colorscheme one
+" colorscheme one
 set background=dark
 
 " Easymotion
@@ -294,3 +294,7 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Buffer navigation
+nnoremap <silent> <C-b> :silent :bp<CR>
+nnoremap <silent> <C-n> :silent :bn<CR>
