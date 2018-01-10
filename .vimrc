@@ -149,6 +149,9 @@ let loaded_matchparen = 1
 " Toggle paste mode on/off
 set pastetoggle=<F2>
 
+" Fold Colors
+:hi Folded guibg=NONE ctermbg=NONE
+
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
