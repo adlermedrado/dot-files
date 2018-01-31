@@ -196,8 +196,10 @@ map <F7> :NERDTreeToggle<CR>
 map <F6> :NERDTreeFind<CR>
 
 " Buffer next, previous and close
-nmap <leader>, :bp<CR>
-nmap <leader>. :bn<CR>
+map <C-J> :bprev<CR>
+map <C-K> :bnext<CR>
+map <C-L> :tabn<CR>
+map <C-H> :tabp<CR>
 map <F3> :bd<CR> 
 
 
