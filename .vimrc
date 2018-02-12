@@ -4,7 +4,6 @@ set nocompatible              " be iMproved, required
 let mapleader = ","
 let g:mapleader = ","
 
-set guifont=Inconsolata\ Nerd\ Font\ Regurar\ 16
 set backspace=start,eol,indent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors
@@ -149,9 +148,6 @@ let loaded_matchparen = 1
 " Toggle paste mode on/off
 set pastetoggle=<F2>
 
-" Fold Colors
-:hi Folded guibg=NONE ctermbg=NONE
-
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
@@ -174,12 +170,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'
 Plugin 'shougo/neocomplete.vim'
-Plugin 'tmhedberg/simpylfold'
 Plugin 'mileszs/ack.vim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'dracula/vim'
 Plugin 'trevordmiller/nova-vim'
-Plugin 'rakr/vim-one'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/goyo.vim'
 
@@ -211,7 +205,9 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+" let g:airline_theme='powerlineish'
 " Statusline Git
 set statusline=%{fugitive#statusline()}
 
@@ -221,6 +217,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_show_hidden = 1
 map <leader>p :CtrlP<cr>
 nnoremap <leader>ç :CtrlPTag<cr>
 
@@ -282,9 +279,6 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" colorscheme one
-set background=dark
-
 " Easymotion
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
@@ -304,3 +298,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Buffer navigation
 nnoremap <silent> <C-b> :silent :bp<CR>
 nnoremap <silent> <C-n> :silent :bn<CR>
+
+" colorscheme 
+set background=dark
+colorscheme solarized8
