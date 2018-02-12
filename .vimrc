@@ -181,6 +181,7 @@ Plugin 'dracula/vim'
 Plugin 'trevordmiller/nova-vim'
 Plugin 'rakr/vim-one'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
