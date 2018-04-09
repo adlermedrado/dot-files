@@ -69,6 +69,9 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
+" Set line width marker
+set colorcolumn=79
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
