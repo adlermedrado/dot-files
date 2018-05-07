@@ -175,7 +175,6 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'trevordmiller/nova-vim'
-Plugin 'lifepillar/vim-solarized8'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/goyo.vim'
 
@@ -207,8 +206,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
-let g:airline_solarized_bg='dark'
+let g:airline_theme='cool'
 " let g:airline_theme='powerlineish'
 " Statusline Git
 set statusline=%{fugitive#statusline()}
@@ -303,4 +301,3 @@ nnoremap <silent> <C-n> :silent :bn<CR>
 
 " colorscheme 
 set background=dark
-colorscheme solarized8
