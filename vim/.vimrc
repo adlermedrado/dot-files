@@ -71,6 +71,7 @@ set mat=2
 
 " Set line width marker
 set colorcolumn=79
+highlight ColorColumn ctermbg=238
 
 " No annoying sound on errors
 set noerrorbells
