@@ -174,11 +174,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'
-Plugin 'shougo/neocomplete.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'trevordmiller/nova-vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'junegunn/goyo.vim'
+Plugin 'valloric/youcompleteme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
