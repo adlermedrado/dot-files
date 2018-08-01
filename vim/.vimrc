@@ -178,6 +178,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'trevordmiller/nova-vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'valloric/youcompleteme'
+Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -206,9 +207,8 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline_powerline_fonts = 1
-let g:airline_theme='wombat'
-" let g:airline_theme='powerlineish'
+let g:airline_theme='molokai'
+
 " Statusline Git
 set statusline=%{fugitive#statusline()}
 
@@ -291,3 +291,4 @@ nnoremap <silent> <C-n> :silent :bn<CR>
 
 " colorscheme 
 set background=dark
+color dracula
