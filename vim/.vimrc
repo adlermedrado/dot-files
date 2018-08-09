@@ -155,33 +155,29 @@ set pastetoggle=<F2>
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
-Plugin 'craigemery/vim-autotag'
-Plugin 'mileszs/ack.vim'
-Plugin 'trevordmiller/nova-vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'valloric/youcompleteme'
-Plugin 'dracula/vim'
+" Make sure you use single quotes
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
+Plug 'craigemery/vim-autotag'
+Plug 'mileszs/ack.vim'
+Plug 'trevordmiller/nova-vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'valloric/youcompleteme'
+Plug 'dracula/vim'
+
+call plug#end()
+
 filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
@@ -240,7 +236,7 @@ ab IPDB import ipdb; ipdb.set_trace()
 " PDB abbreviation
 ab PDB import pdb; pdb.set_trace()
 
-" Ack.VundleVim
+" Ack.Vim
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
@@ -292,3 +288,10 @@ nnoremap <silent> <C-n> :silent :bn<CR>
 " colorscheme 
 set background=dark
 color dracula
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
