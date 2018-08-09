@@ -155,6 +155,12 @@ set pastetoggle=<F2>
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
@@ -173,8 +179,13 @@ Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'trevordmiller/nova-vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'valloric/youcompleteme'
 Plug 'dracula/vim'
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
+Plug 'valloric/youcompleteme'
 
 call plug#end()
 
@@ -288,10 +299,3 @@ nnoremap <silent> <C-n> :silent :bn<CR>
 " colorscheme 
 set background=dark
 color dracula
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
