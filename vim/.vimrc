@@ -179,7 +179,9 @@ Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'trevordmiller/nova-vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'dracula/vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ryanoasis/vim-devicons'
+
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
     !./install.sh
@@ -214,6 +216,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
 let g:airline_theme='molokai'
 
 " Statusline Git
@@ -298,4 +301,3 @@ nnoremap <silent> <C-n> :silent :bn<CR>
 
 " colorscheme 
 set background=dark
-color dracula
