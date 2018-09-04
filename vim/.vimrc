@@ -181,6 +181,7 @@ Plug 'trevordmiller/nova-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'chrisbra/csv.vim'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
