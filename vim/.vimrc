@@ -261,7 +261,7 @@ if executable('ag')
 endif
 
 " Clean search
-nnoremap <esc> :noh<return><esc>
+nmap <esc><esc> :noh<return>
 
 " NERDCommenter
 " Add spaces after comment delimiters by default
