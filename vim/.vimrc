@@ -177,7 +177,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
-Plug 'trevordmiller/nova-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ryanoasis/vim-devicons'
@@ -321,3 +320,4 @@ let g:NERDToggleCheckAllLines = 1
 
 " colorscheme 
 set background=dark
+colorscheme nord
