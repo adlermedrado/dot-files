@@ -321,3 +321,5 @@ let g:NERDToggleCheckAllLines = 1
 " colorscheme 
 set background=dark
 colorscheme nord
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
