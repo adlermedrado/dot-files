@@ -7,4 +7,8 @@ c() {
     cd ~/devel/$* && pipenv shell;
 }
 
+ctp() {
+    ~/devel/automate/vim/update-ctags-for-python-project.sh
+}
+
 alias ct='ctags -R --verbose=yes .'
