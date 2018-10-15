@@ -27,7 +27,7 @@ set showcmd
 set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+set so=0
 
 " Turn on the Wild menu
 set wildmenu
