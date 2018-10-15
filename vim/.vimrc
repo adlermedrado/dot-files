@@ -209,7 +209,12 @@ map <C-L> :tabn<CR>
 map <C-H> :tabp<CR>
 map <F3> :bd<CR> 
 
-
+" Disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+"
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1

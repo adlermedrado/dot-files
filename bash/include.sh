@@ -8,7 +8,5 @@ c() {
 }
 
 ctp() {
-    ~/devel/automate/vim/update-ctags-for-python-project.sh
+    `~/devel/automate/vim/update-ctags-for-python-project.sh`
 }
-
-alias ct='ctags -R --verbose=yes .'
