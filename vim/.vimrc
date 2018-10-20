@@ -178,9 +178,8 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'arcticicestudio/nord-vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'chrisbra/csv.vim'
+Plug 'nlknguyen/papercolor-theme'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -194,6 +193,12 @@ call plug#end()
 filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
+
+" colorscheme 
+set t_Co=256   " This is may or may not needed.
+
+set background=dark
+colorscheme PaperColor
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -222,7 +227,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
+let g:airline_theme='papercolor'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
@@ -322,9 +327,3 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
-
-" colorscheme 
-set background=dark
-colorscheme nord
-let g:nord_italic_comments = 1
-let g:nord_cursor_line_number_background = 1
