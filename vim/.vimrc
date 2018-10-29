@@ -178,7 +178,6 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'ryanoasis/vim-devicons'
 Plug 'nlknguyen/papercolor-theme'
 
 function! BuildYCM(info)
