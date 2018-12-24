@@ -178,7 +178,7 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'nlknguyen/papercolor-theme'
+Plug 'ajmwagar/vim-deus'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -197,7 +197,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
-colorscheme PaperColor
+colorscheme deus 
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -225,8 +225,8 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 1
-let g:airline_theme='papercolor'
+let g:airline_powerline_fonts = 0
+let g:airline_theme='deus'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
