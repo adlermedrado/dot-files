@@ -178,7 +178,8 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'ajmwagar/vim-deus'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -197,7 +198,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
-colorscheme deus 
+colorscheme gruvbox 
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -226,7 +227,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 0
-let g:airline_theme='deus'
+let g:airline_theme='gruvbox'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
