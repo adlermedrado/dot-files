@@ -174,13 +174,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
+Plug 'Yggdroot/indentLine'
+Plug 'mhinz/vim-signify'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -272,22 +274,6 @@ endif
 
 " Clean search
 nmap <esc><esc> :noh<return>
-
-" NERDCommenter
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
 
 " Easymotion
 " <Leader>f{char} to move to {char}
