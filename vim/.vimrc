@@ -182,6 +182,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
+Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -200,7 +201,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
-colorscheme gruvbox 
+colorscheme jellybeans
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -229,7 +230,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 0
-let g:airline_theme='gruvbox'
+let g:airline_theme='papercolor'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
