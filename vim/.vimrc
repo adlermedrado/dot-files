@@ -5,6 +5,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 set backspace=start,eol,indent
+set shell=/bin/bash
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
