@@ -161,12 +161,6 @@ mode "resize" {
 
 bindsym Mod4+r mode "resize"
 
-#Start i3bar to display a workspace bar (plus the system information i3status
-#finds out, if available)
-
-bar {
-    status_command i3status
-}
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && notify-send -u low -t 200 'increase volume' #increase sound volume
@@ -189,3 +183,6 @@ exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/148283-cyberpunk-futuri
 bindsym Mod4+Control+l exec i3lock -d -c 000000
 exec --no-startup-id xautolock -time 2 -locker 'i3lock -d -c 000000'
 exec --no-startup-id xset dpms 300
+
+# start polybar
+exec_always --no-startup-id $HOME/.config/polybar/start_bar.sh
