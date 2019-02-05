@@ -13,6 +13,13 @@
 # is used in the bar {} block below.
 font pango:Hack Nerd Font 11
 
+# Titlebar deuglify
+# client.focused          #3F8AC2 #096BAA #00BAA7 #00DA8E
+client.focused          #808880 #BE29EC #680066 #EFBBFF
+client.focused_inactive #333333 #5F676A #ffffff #484e50
+client.unfocused        #333333 #424242 #888888 #292d2e 
+client.urgent           #C10004 #900000 #ffffff #900000
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
