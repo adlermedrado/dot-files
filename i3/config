@@ -47,8 +47,18 @@ bindsym Mod4+Return exec i3-sensible-terminal
 # kill focused window
 bindsym Mod4+Shift+q kill
 
+# start rofi (a program launcher)
+set $execute exec rofi -show drun -eh 2 -padding 16
+bindsym Mod4+d $execute
+bindsym XF86Search $execute
+
+bindsym Mod4+shift+d exec rofi -show run -eh 2 -padding 16
+
+# list open windows to switch to
+bindsym Mod4+Tab exec rofi -show window
+
 # start dmenu (a program launcher)
-bindsym Mod4+d exec ~/devel/dmenu-extended/dmenu_extended_run
+# bindsym Mod4+d exec ~/devel/dmenu-extended/dmenu_extended_run
 # bindsym Mod4+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
