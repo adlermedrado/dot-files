@@ -171,8 +171,8 @@ bindsym Mod4+r mode "resize"
 
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && notify-send -u low -t 200 'increase volume' #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && notify-send -u low -t 200 'decrease volume' #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% && notify-send -u low -t 200 'increase volume' #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% && notify-send -u low -t 200 'decrease volume' #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && notify-send -u low -t 200 'Toggling mute/unmute'  # mute sound
 
 # Sreen brightness controls
@@ -189,8 +189,11 @@ exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/148283-cyberpunk-futuri
 
 # lock screen
 bindsym Mod4+Control+l exec i3lock -d -c 000000
-exec --no-startup-id xautolock -time 2 -locker 'i3lock -d -c 000000'
-exec --no-startup-id xset dpms 300
+# exec --no-startup-id xautolock -time 2 -locker 'i3lock -d -c 000000'
+# exec --no-startup-id xset dpms 300
 
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/start_bar.sh
+
+# Enable mouse tap to click
+exec no-startup-id xinput set-prop 12 297 1

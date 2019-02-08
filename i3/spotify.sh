@@ -7,5 +7,5 @@ if [ "$player_status" = "Playing" ]; then
 elif [ "$player_status" = "Paused" ]; then
     echo "Paused - $(playerctl metadata artist) - $(playerctl metadata title)"
 else
-    echo "#3"
+    echo ""
 fi
