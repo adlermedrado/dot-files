@@ -74,8 +74,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Hack Regular Nerd Font:pixelsize=10;3"
-font-1 = "Iosevka Nerd Font:pixelsize=13;3"
+font-0 = "DejaVu Sans Mono:pixelsize=10,3"
+font-1 = "Hack Regular Nerd Font:pixelsize=10;3"
+font-2 = "Iosevka Nerd Font:pixelsize=13;3"
 
 modules-left = i3
 modules-center = spotify
