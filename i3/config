@@ -200,3 +200,6 @@ exec_always --no-startup-id $HOME/.config/polybar/start_bar.sh
 
 # Enable mouse tap to click
 exec no-startup-id xinput set-prop 12 297 1
+
+# Enable Compton
+exec --no-startup-id compton -CGb
