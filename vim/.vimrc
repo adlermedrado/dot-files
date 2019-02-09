@@ -185,7 +185,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 Plug 'godlygeek/tabular'
-Plug 'dylanaraps/wal.vim'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -204,8 +203,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
-" colorscheme jellybeans
-colorscheme wal
+colorscheme jellybeans
 
 " NERDTree
 " Toggle nerdtree with F7
