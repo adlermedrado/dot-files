@@ -188,7 +188,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Set wallpaper
-exec --no-startup-id feh --bg-fill ~/Pictures/wallpapers/148283-cyberpunk-futuristic-neon.jpg
+exec --no-startup-id feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
 
 # lock screen
 bindsym Mod4+Control+l exec i3lock -d -c 000000
