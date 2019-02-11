@@ -187,6 +187,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
+Plug 'godlygeek/tabular'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
