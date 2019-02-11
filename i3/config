@@ -188,7 +188,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Set wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/148283-cyberpunk-futuristic-neon.jpg 
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/wallhaven-549712.jpg 
 
 # lock screen
 bindsym Mod4+Control+l exec i3lock -d -c 000000
@@ -203,3 +203,12 @@ exec no-startup-id xinput set-prop 12 297 1
 
 # Enable Compton
 exec --no-startup-id compton -CGb
+
+# Dual monitor
+# exec_always –no-startup-id xrandr –output HDMI1-1 –right-of eDP-1-1 –auto
+
+# Print screen
+set $screenshot_file '/home/adler/Pictures/screenshots/%Y-%m-%d_%H-%M-%S-$wx$h.png'
+bindsym --release Print exec escrotum -s $screenshot_file && notify-send "done" 
+bindsym Ctrl+Print exec scrot --focused --count --delay 0.5 --silent $screenshot_file && notify-send "done"
+bindsym Shift+Print exec scrot --silent $screenshot_file && notify-send "done"
