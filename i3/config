@@ -15,7 +15,8 @@
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+# font pango:DejaVu Sans Mono 8
+font pango:Hack Regular Nerd Font 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -209,6 +210,6 @@ exec --no-startup-id compton -CGb
 
 # Print screen
 set $screenshot_file '/home/adler/Pictures/screenshots/%Y-%m-%d_%H-%M-%S-$wx$h.png'
-bindsym --release Print exec escrotum -s $screenshot_file && notify-send "done" 
+bindsym --release Shift+Print exec scrot -s '%Y-%m-%d_%H-%M-%S-$wx$h.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 bindsym Ctrl+Print exec scrot --focused --count --delay 0.5 --silent $screenshot_file && notify-send "done"
-bindsym Shift+Print exec scrot --silent $screenshot_file && notify-send "done"
+bindsym Print exec scrot --silent $screenshot_file && notify-send "done"
