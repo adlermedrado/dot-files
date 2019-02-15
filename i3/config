@@ -210,6 +210,6 @@ exec --no-startup-id compton -CGb
 
 # Print screen
 set $screenshot_file '/home/adler/Pictures/screenshots/%Y-%m-%d_%H-%M-%S-$wx$h.png'
-bindsym --release Shift+Print exec scrot -s '%Y-%m-%d_%H-%M-%S-$wx$h.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+bindsym --release Shift+Print exec scrot -s '%Y-%m-%d_%H-%M-%S-$wx$h.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' && notify-send "done"  # Area selection
 bindsym Ctrl+Print exec scrot --focused --count --delay 0.5 --silent $screenshot_file && notify-send "done"
 bindsym Print exec scrot --silent $screenshot_file && notify-send "done"
