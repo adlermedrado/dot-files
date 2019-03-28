@@ -6,11 +6,11 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-source config.sh
+source $HOME/config.sh
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-source commands.sh
+source $HOME/commands.sh
 
