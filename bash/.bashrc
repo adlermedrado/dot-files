@@ -14,3 +14,7 @@ source $HOME/config.sh
 # User specific aliases and functions
 source $HOME/commands.sh
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/amedrado/.sdkman"
+[[ -s "/home/amedrado/.sdkman/bin/sdkman-init.sh" ]] && source "/home/amedrado/.sdkman/bin/sdkman-init.sh"

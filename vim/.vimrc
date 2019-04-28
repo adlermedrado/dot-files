@@ -186,9 +186,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
-Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 Plug 'godlygeek/tabular'
-Plug 'nlknguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -205,9 +204,9 @@ filetype plugin indent on    " required
 
 " colorscheme 
 set t_Co=256   " This is may or may not needed.
-
-set background=dark
-colorscheme PaperColor
+let g:solarized_termcolors=256
+set background=light
+colorscheme solarized
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -236,7 +235,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 0
-let g:airline_theme='papercolor'
+let g:airline_theme='solarized'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
