@@ -186,13 +186,6 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'godlygeek/tabular'
-Plug 'altercation/vim-colors-solarized'
-
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
-endfunction
 Plug 'valloric/youcompleteme'
 
 call plug#end()
@@ -204,8 +197,8 @@ filetype plugin indent on    " required
 " colorscheme 
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme gruvbox
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -234,7 +227,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 0
-let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
