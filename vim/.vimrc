@@ -181,7 +181,7 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
@@ -198,7 +198,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
 set background=dark
-colorscheme gruvbox
+colorscheme dracula
 
 " NERDTree
 " Toggle nerdtree with F7
@@ -227,7 +227,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 0
-let g:airline_theme='gruvbox'
+let g:airline_theme='dracula'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
