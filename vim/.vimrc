@@ -187,6 +187,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'godlygeek/tabular'
 Plug 'shougo/neocomplete.vim'
+Plug 'lucasprag/simpleblack'
 
 call plug#end()
 
@@ -198,7 +199,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
 set background=dark
-colorscheme dracula
+colorscheme simpleblack
 
 " NERDTree
 " Toggle nerdtree with F7
