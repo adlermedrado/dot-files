@@ -4,6 +4,8 @@ set nocompatible              " be iMproved, required
 let mapleader = ","
 let g:mapleader = ","
 
+set shell=/usr/bin/zsh
+
 set backspace=start,eol,indent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors
@@ -187,8 +189,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'godlygeek/tabular'
 Plug 'shougo/neocomplete.vim'
-Plug 'lucasprag/simpleblack'
-
+Plug 'cocopon/iceberg.vim'
+Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 filetype plugin indent on    " required
@@ -199,7 +201,10 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
 set background=dark
-colorscheme simpleblack
+colorscheme iceberg
+
+" Vim Rainbow Brackets
+let g:rainbow_active = 1
 
 " NERDTree
 " Toggle nerdtree with F7
