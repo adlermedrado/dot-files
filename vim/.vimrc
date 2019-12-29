@@ -4,7 +4,7 @@ set nocompatible              " be iMproved, required
 let mapleader = ","
 let g:mapleader = ","
 
-set shell=/usr/bin/zsh
+set shell=/usr/bin/bash
 
 set backspace=start,eol,indent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
