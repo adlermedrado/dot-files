@@ -38,7 +38,7 @@ plugins=(
     ["Yggdroot"]="https://github.com/Yggdroot/indentLine.git"
     ["mhinz"]="https://github.com/mhinz/vim-signify.git"
     ["frazrepo"]="https://github.com/frazrepo/vim-rainbow.git"
-    ["rakr"]="https://github.com/rakr/vim-one.git"
+    ["tomasr"]="https://github.com/tomasr/molokai.git"
 
 )
 

@@ -202,7 +202,9 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
 set background=dark
-colorscheme one
+colorscheme molokai
+
+let g:molokai_original = 1
 
 " Vim Rainbow Brackets
 let g:rainbow_active = 1
@@ -233,8 +235,8 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 0
-let g:airline_theme='one'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='jellybeans'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
