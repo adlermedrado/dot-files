@@ -160,39 +160,36 @@ set pastetoggle=<F2>
 " Set autopep8 for python files
 au FileType python setlocal formatprg=autopep8\ -
 
-" Deprecate vim-plugs usage
-" if empty(glob('~/.vim/autoload/plug.vim'))
-"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
+if empty(glob('~/.vim/autoload/plug.vim'))
+ silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" call plug#begin('~/.vim/plugged')
-
-" Make sure you use single quotes
-
-" Plug 'tpope/vim-fugitive'
-" Plug 'junegunn/gv.vim'
-" Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/syntastic'
-" Plug 'scrooloose/nerdcommenter'
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'tpope/vim-surround'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'majutsushi/tagbar'
-" Plug 'craigemery/vim-autotag'
-" Plug 'mileszs/ack.vim'
-" Plug 'easymotion/vim-easymotion'
-" Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'mhinz/vim-startify'
-" Plug 'Yggdroot/indentLine'
-" Plug 'mhinz/vim-signify'
-" Plug 'godlygeek/tabular'
-" Plug 'shougo/neocomplete.vim'
-" Plug 'cocopon/iceberg.vim'
-" Plug 'frazrepo/vim-rainbow'
-" call plug#end()
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
+Plug 'craigemery/vim-autotag'
+Plug 'mileszs/ack.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'mhinz/vim-startify'
+Plug 'Yggdroot/indentLine'
+Plug 'mhinz/vim-signify'
+Plug 'godlygeek/tabular'
+Plug 'shougo/neocomplete.vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'frazrepo/vim-rainbow'
+Plug 'tomasr/molokai'
+call plug#end()
 
 filetype plugin indent on    " required
 
