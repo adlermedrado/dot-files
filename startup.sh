@@ -1,9 +1,14 @@
 #!/usr/bin/bash
 
+echo "Installing tmux package manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+echo "Done"
+
 if [ ! -d "${HOME}/.vim/pack" ] 
 then
     echo "Creating ${HOME}/.vim/pack" 
     mkdir -p $HOME/.vim/pack
+    echo "Done"
 fi
 
 
@@ -15,6 +20,7 @@ install_plugin () {
         mkdir -p $HOME/.vim/pack/$1/start
         cd $HOME/.vim/pack/$1/start
         git clone $2
+        echo "Done"
     fi
 }
 
