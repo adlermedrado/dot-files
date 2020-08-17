@@ -4,7 +4,7 @@ set nocompatible              " be iMproved, required
 let mapleader = ","
 let g:mapleader = ","
 
-set shell=/usr/bin/bash
+set shell=/bin/bash
 
 set backspace=start,eol,indent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,7 +199,7 @@ filetype plugin indent on    " required
 set t_Co=256   " This is may or may not needed.
 let g:solarized_termcolors=256
 set background=dark
-colorscheme molokai
+colorscheme dracula
 
 let g:molokai_original = 1
 
