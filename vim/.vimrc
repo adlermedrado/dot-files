@@ -180,7 +180,7 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'lifepillar/vim-solarized8'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
@@ -198,10 +198,11 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " colorscheme 
-set t_Co=256   " This is may or may not needed.
-let g:solarized_termcolors=256
-set background=dark
-colorscheme dracula
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set background=light
+colorscheme solarized8
 
 let g:molokai_original = 1
 
@@ -235,7 +236,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='jellybeans'
+let g:airline_theme='solarized'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
