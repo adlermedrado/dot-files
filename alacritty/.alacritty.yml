@@ -6,7 +6,7 @@ scrolling:
 font:
   size: 16
   normal:
-    family: Hack Nerd Font
+    family: "JetBrainsMono Nerd Font"
 
 key_bindings:
   - { key: A,         mods: Alt,       chars: "\x1ba"                       }
