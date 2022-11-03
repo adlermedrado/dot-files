@@ -180,17 +180,16 @@ Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'godlygeek/tabular'
-Plug 'shougo/neocomplete.vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'frazrepo/vim-rainbow'
-Plug 'tomasr/molokai'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tomasr/molokai'
 call plug#end()
 
 filetype plugin indent on    " required
@@ -202,9 +201,7 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-colorscheme dracula
-
-let g:molokai_original = 1
+colorscheme molokai
 
 " Vim Rainbow Brackets
 let g:rainbow_active = 1
@@ -236,7 +233,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_theme='molokai'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}

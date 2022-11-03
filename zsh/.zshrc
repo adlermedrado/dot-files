@@ -56,3 +56,8 @@ zplug load
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias ls='ls --color=auto'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
