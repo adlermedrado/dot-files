@@ -56,8 +56,11 @@ zplug load
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias ls='ls --color=auto'
+alias bandit='docker run -it --rm --name bandit -v "$PWD":/workdir adlermedrado/bandit'
+alias black='docker run -it --rm --name black -v "$PWD":/workdir adlermedrado/black'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"

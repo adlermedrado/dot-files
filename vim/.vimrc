@@ -184,12 +184,12 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-signify'
 Plug 'godlygeek/tabular'
-Plug 'cocopon/iceberg.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomasr/molokai'
+Plug 'puremourning/vimspector'
 call plug#end()
 
 filetype plugin indent on    " required
@@ -297,6 +297,13 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Buffer navigation
 nnoremap <silent> <C-b> :silent :bp<CR>
 nnoremap <silent> <C-n> :silent :bn<CR>
+
+" key mappings example
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" " there's way more, see `:help coc-key-mappings@en'
+
 
 " NERDCommenter
 
