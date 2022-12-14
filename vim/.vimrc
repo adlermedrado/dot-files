@@ -188,7 +188,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tomasr/molokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'puremourning/vimspector'
 call plug#end()
 
@@ -201,7 +201,7 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-colorscheme molokai
+colorscheme dracula
 
 " Vim Rainbow Brackets
 let g:rainbow_active = 1
@@ -233,7 +233,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
+let g:airline_theme='dracula'
 
 " Statusline Git
 set statusline=%{fugitive#statusline()}
