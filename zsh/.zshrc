@@ -2,7 +2,7 @@
 export EDITOR=vim
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':$PATH
 export TERM="screen-256color"
 
 # History
