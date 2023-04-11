@@ -20,29 +20,14 @@ setopt hist_verify
 setopt inc_append_history
 setopt share_history
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 if [[ ! -d ~/.zplug ]];then
   git clone https://github.com/zplug/zplug ~/.zplug
 fi
 source ~/.zplug/init.zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/sudo", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-completions"
 zplug 'zsh-users/zsh-autosuggestions'
-zplug "themes/robbyrussell", from:oh-my-zsh, as:theme
 zplug 'plugins/fzf', from:oh-my-zsh
 zplug 'plugins/tmux', from:oh-my-zsh
-zplug 'romkatv/powerlevel10k', as:theme, depth:1
-zplug 'djui/alias-tips'
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -51,9 +36,6 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug load
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias ls='ls --color=auto'
 alias bandit='docker run -it --rm --name bandit -v "$PWD":/workdir adlermedrado/bandit'
@@ -64,3 +46,9 @@ alias black='docker run -it --rm --name black -v "$PWD":/workdir adlermedrado/bl
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/amedrado/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+eval "$(starship init zsh)"
