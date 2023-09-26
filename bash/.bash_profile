@@ -1,8 +1,9 @@
 export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$PATH"
 export EDITOR="nvim"
 alias ls="ls -G"
-alias idea='/Applications/Intellij\ IDEA.app/Contents/MacOS/idea'
+alias idea="/Applications/Intellij\ IDEA.app/Contents/MacOS/idea"
 alias vim=nvim
+alias brewupd="brew upgrade && brew cleanup"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init bash)"
