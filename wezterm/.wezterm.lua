@@ -15,7 +15,7 @@ end
 -- For example, changing the color scheme:
 
 -- config.color_scheme = 'FarSide (terminal.sexy)'
-config.color_scheme = 'rose-pine-moon'
+config.color_scheme = 'rose-pine-dawn'
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
 
