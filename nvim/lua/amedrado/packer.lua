@@ -83,4 +83,11 @@ return require('packer').startup(function(use)
             requires = { 'nvim-tree/nvim-web-devicons', opt = true }
         }
 
+        use {
+            'numToStr/Comment.nvim',
+            config = function()
+                require('Comment').setup()
+            end
+        }
+
     end)
