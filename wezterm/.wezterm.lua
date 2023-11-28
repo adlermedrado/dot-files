@@ -9,6 +9,6 @@ end
 config.color_scheme = 'Tokyo Night'
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
-config.font_size = 15.0
+config.font_size = 16.0
 
 return config
