@@ -9,6 +9,7 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = 'Tokyo Night'
+config.window_background_opacity = 0.9
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
 config.font_size = 16.0
