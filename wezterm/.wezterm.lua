@@ -2,6 +2,8 @@ local wezterm = require 'wezterm'
 
 local config = {}
 
+config.scrollback_lines = 9999
+
 if wezterm.config_builder then
     config = wezterm.config_builder()
 end
