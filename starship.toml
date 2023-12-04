@@ -17,11 +17,11 @@ style_root = "red bold"
 format = "[$user]($style) "
 disabled = false
 show_always = true
-#
+
 [hostname]
 ssh_only = false
 ssh_symbol = '🌐 '
-format = '@[$ssh_symbol$hostname]($style) in '
+format = '[$ssh_symbol]($style)'
 style = 'bold dimmed green'
 trim_at = "."
 disabled = false
