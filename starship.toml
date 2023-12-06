@@ -2,12 +2,3 @@ command_timeout=10000
 add_newline=true
 scan_timeout=30
 format = '$all'
-
-[battery]
-full_symbol = '🔋 '
-charging_symbol = '⚡️ '
-discharging_symbol = '💀 '
-
-[[battery.display]]
-threshold = 100
-
