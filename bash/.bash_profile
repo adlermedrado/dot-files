@@ -1,6 +1,9 @@
 export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$PATH"
 export EDITOR="nvim"
 
+HISTSIZE=10000
+HISTFILESIZE=10000
+
 alias ls="ls -G"
 alias idea="/Applications/Intellij\ IDEA.app/Contents/MacOS/idea"
 alias vim=nvim
