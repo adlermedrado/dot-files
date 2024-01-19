@@ -1,5 +1,10 @@
-export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$PATH"
-export EDITOR="nvim"
+export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$HOME/.config/emacs/bin:$PATH"
+export EDITOR="lvim"
+export GREP_OPTIONS="--color=always"
+
+if [ -d "$(brew --prefix)/opt/grep/libexec/gnubin" ]; then
+    PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
+fi
 
 HISTSIZE=10000
 HISTFILESIZE=10000
@@ -11,6 +16,7 @@ alias brewupd="brew upgrade && brew cleanup"
 alias tn="tmux new-session -s "
 alias tat="tmux attach -t "
 alias tls="tmux ls"
+alias vim="lvim"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init bash)"
@@ -27,3 +33,4 @@ source <(op completion bash)
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+. "$HOME/.cargo/env"
