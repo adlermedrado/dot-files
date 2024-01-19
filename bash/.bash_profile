@@ -11,7 +11,6 @@ HISTFILESIZE=10000
 
 alias ls="ls -G"
 alias idea="/Applications/Intellij\ IDEA.app/Contents/MacOS/idea"
-alias vim=nvim
 alias brewupd="brew upgrade && brew cleanup"
 alias tn="tmux new-session -s "
 alias tat="tmux attach -t "
