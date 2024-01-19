@@ -1,15 +1,12 @@
 export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$HOME/.config/emacs/bin:$PATH"
 export EDITOR="lvim"
 export GREP_OPTIONS="--color=always"
-
-if [ -d "$(brew --prefix)/opt/grep/libexec/gnubin" ]; then
-    PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
-fi
+export CLICOLOR="--color=auto"
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 HISTSIZE=10000
 HISTFILESIZE=10000
 
-alias ls="ls -G"
 alias idea="/Applications/Intellij\ IDEA.app/Contents/MacOS/idea"
 alias brewupd="brew upgrade && brew cleanup"
 alias tn="tmux new-session -s "
@@ -19,6 +16,10 @@ alias vim="lvim"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init bash)"
+
+if [ -d "$(brew --prefix)/opt/grep/libexec/gnubin" ]; then
+    PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
