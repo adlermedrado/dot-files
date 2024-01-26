@@ -68,8 +68,8 @@ NAME and ARGS are as in `use-package'."
   :config
   (centaur-tabs-mode t)
   :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
+  ("C-x [" . centaur-tabs-backward)
+  ("C-x ]" . centaur-tabs-forward))
 (setq centaur-tabs-set-icons t)
 (setq centaur-tabs-gray-out-icons 'buffer)
 (setq centaur-tabs-set-bar 'left)
