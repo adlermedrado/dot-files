@@ -1,4 +1,4 @@
-export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$HOME/.config/emacs/bin:$PATH"
+export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$PATH"
 export EDITOR="lvim"
 export GREP_OPTIONS="--color=always"
 export CLICOLOR="--color=auto"
