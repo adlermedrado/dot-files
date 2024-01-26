@@ -1,3 +1,7 @@
+;; init file tips/examples:
+;; https://github.com/ebellani/Emacs.d/blob/master/init.el
+;; https://github.com/dunossauro/dotfiles/blob/main/.emacs.d/init.el
+
 ;; Configure straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -56,6 +60,20 @@ NAME and ARGS are as in `use-package'."
 (ido-mode 1)
 (cua-mode 1)
 (display-time-mode 1)
+
+;; Buffer Tabs
+(use-package centaur-tabs
+  :ensure t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-gray-out-icons 'buffer)
+(setq centaur-tabs-set-bar 'left)
+(centaur-tabs-headline-match)
 
 ;; Font
 (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 150)
