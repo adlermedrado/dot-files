@@ -45,7 +45,7 @@ NAME and ARGS are as in `use-package'."
      :straight nil
      ,@args))
 
-;; Remove menus
+;; Remove menus, setup GUI
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -129,7 +129,7 @@ NAME and ARGS are as in `use-package'."
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;;(doom-themes-neotree-config)
+  ;; (doom-themes-neotree-config)
   ;; or for treemacs users
   ;;(setq doom-themes-treemacs-theme "doom-colors") ; use "doom-colors" for less minimal icon theme
   ;;(doom-themes-treemacs-config)
@@ -147,6 +147,58 @@ NAME and ARGS are as in `use-package'."
 	projectile-switch-project-action 'neotree-projectile-action
 	projectile-indexing-method 'alien
 	projectile-use-git-grep 1))
+
+;; Incremental completions
+(use-package helm
+  :straight t
+  :diminish
+  :bind (("C-h a"   . helm-apropos)
+         ("C-x b"   . helm-mini)
+         ("C-x C-b" . helm-buffers-list)
+         ("C-x C-m" . helm-M-x)
+         ("C-x m"   . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-r" . helm-recentf)
+         ("C-x r l" . helm-filtered-bookmarks)
+         ("C-x r b" . helm-filtered-bookmarks)
+         ("C-x i"   . helm-imenu)
+         ("M-y"     . helm-show-kill-ring)
+         ("M-i"     . helm-swoop-without-pre-input)
+         ("M-I"     . helm-swoop-back-to-last-point)
+         ("C-c M-i" . helm-multi-swoop)
+         ("C-x M-i" . helm-multi-swoop-all))
+  :bind (:map helm-map
+              ("<tab>" . helm-execute-persistent-action)
+              ("C-z"   . helm-select-action))
+  :config
+  (setq helm-ff-transformer-show-only-basename nil
+        helm-external-programs-associations '(("zip" . "unzip")
+                                              ("mp4" . "smplayer")
+                                              ("mkv" . "smplayer")
+                                              ("docx" . "libreoffice"))
+        helm-completion-style 'emacs
+        helm-yank-symbol-first                 t
+        helm-move-to-line-cycle-in-source      t
+        helm-buffers-fuzzy-matching            t
+        helm-ff-auto-update-initial-value      t
+        helm-imenu-fuzzy-match                 t
+        helm-buffer-max-length                 50
+        helm-ff-candidate-number-limit         200
+        ;; helm-display-function                  'helm-display-buffer-in-own-frame
+        helm-display-buffer-width              90
+        helm-display-function                  'helm-default-display-buffer
+        helm-display-buffer-reuse-frame        t
+        helm-use-undecorated-frame-option      t
+        helm-show-completion-display-function #'helm-show-completion-default-display-function)
+  (helm-mode 1)
+  (helm-adaptive-mode 1)
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (eshell-cmpl-initialize)
+              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+              (define-key eshell-hist-mode-map
+                          [remap eshell-previous-matching-input-from-input]
+                          'helm-eshell-history))))
 
 (use-package magit
   :straight t
@@ -178,7 +230,7 @@ NAME and ARGS are as in `use-package'."
   :ensure t
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  :bind (("C-1". 'neotree-toggle));; JetBrains toggle file explorero key
+  :bind (("C-\\". 'neotree-toggle))
   )
 
 ;; Which key helper to show keyboard options
