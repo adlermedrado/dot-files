@@ -62,6 +62,12 @@ NAME and ARGS are as in `use-package'."
 (cua-mode 1)
 (display-time-mode 1)
 
+;; Manage windows states
+(use-package ace-window
+  :ensure t)
+(global-set-key (kbd "M-o") 'ace-window)
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
 ;; Buffer Tabs
 (use-package centaur-tabs
   :ensure t
