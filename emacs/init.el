@@ -1,7 +1,19 @@
+;;; init.el --- Adler's Emacs init file
+
+;;; Commentary:
+;;
+;; Adler Medrado' Emacs Config.
+;; 
+
 ;; init file tips/examples:
 ;; https://github.com/ebellani/Emacs.d/blob/master/init.el
 ;; https://github.com/dunossauro/dotfiles/blob/main/.emacs.d/init.el
 ;; https://macowners.club/posts/email-emacs-mu4e-macos/
+
+;;; Code:
+
+;; set load-path
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
 
 ;; Configure straight.el
 (defvar bootstrap-version)
@@ -18,7 +30,7 @@
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))  
+  (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
 
@@ -61,6 +73,7 @@ NAME and ARGS are as in `use-package'."
 (ido-mode 1)
 (cua-mode 1)
 (display-time-mode 1)
+(winner-mode 1)
 
 ;; Manage windows states
 (use-package ace-window
@@ -81,6 +94,14 @@ NAME and ARGS are as in `use-package'."
 (setq centaur-tabs-gray-out-icons 'buffer)
 (setq centaur-tabs-set-bar 'left)
 (centaur-tabs-headline-match)
+
+;;;;Org mode configuration
+;; Enable Org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-log-done t)
 
 ;; Font
 (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 150)
@@ -133,7 +154,7 @@ NAME and ARGS are as in `use-package'."
   :config
   (setq doom-themes-enable-bold t 
         doom-themes-enable-italic t)
-  (load-theme 'doom-monokai-classic t)
+  (load-theme 'doom-tokyo-night t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -152,7 +173,7 @@ NAME and ARGS are as in `use-package'."
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/git/")
-	projectile-switch-project-action 'neotree-projectile-action
+	;; projectile-switch-project-action 'neotree-projectile-action 
 	projectile-indexing-method 'alien
 	projectile-use-git-grep 1))
 
@@ -233,12 +254,116 @@ NAME and ARGS are as in `use-package'."
   (add-hook 'kill-emacs-hook #'persp-state-save)
   (setq persp-state-default-file "~/.emacs.d/persp.state"))
 
-(use-package neotree
+(use-package treemacs
   :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  :bind (("C-\\". 'neotree-toggle))
-  )
+  (progn
+    (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay        0.5
+          treemacs-directory-name-transformer      #'identity
+          treemacs-display-in-side-window          t
+          treemacs-eldoc-display                   'simple
+          treemacs-file-event-delay                2000
+          treemacs-file-extension-regex            treemacs-last-period-regex-value
+          treemacs-file-follow-delay               0.2
+          treemacs-file-name-transformer           #'identity
+          treemacs-follow-after-init               t
+          treemacs-expand-after-init               t
+          treemacs-find-workspace-method           'find-for-file-or-pick-first
+          treemacs-git-command-pipe                ""
+          treemacs-goto-tag-strategy               'refetch-index
+          treemacs-header-scroll-indicators        '(nil . "^^^^^^")
+          treemacs-hide-dot-git-directory          t
+          treemacs-indentation                     2
+          treemacs-indentation-string              " "
+          treemacs-is-never-other-window           nil
+          treemacs-max-git-entries                 5000
+          treemacs-missing-project-action          'ask
+          treemacs-move-forward-on-expand          nil
+          treemacs-no-png-images                   nil
+          treemacs-no-delete-other-windows         t
+          treemacs-project-follow-cleanup          nil
+          treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                        'left
+          treemacs-read-string-input               'from-child-frame
+          treemacs-recenter-distance               0.1
+          treemacs-recenter-after-file-follow      nil
+          treemacs-recenter-after-tag-follow       nil
+          treemacs-recenter-after-project-jump     'always
+          treemacs-recenter-after-project-expand   'on-distance
+          treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
+          treemacs-project-follow-into-home        nil
+          treemacs-show-cursor                     nil
+          treemacs-show-hidden-files               t
+          treemacs-silent-filewatch                nil
+          treemacs-silent-refresh                  nil
+          treemacs-sorting                         'alphabetic-asc
+          treemacs-select-when-already-in-treemacs 'move-back
+          treemacs-space-between-root-nodes        t
+          treemacs-tag-follow-cleanup              t
+          treemacs-tag-follow-delay                1.5
+          treemacs-text-scale                      nil
+          treemacs-user-mode-line-format           nil
+          treemacs-user-header-line-format         nil
+          treemacs-wide-toggle-width               70
+          treemacs-width                           35
+          treemacs-width-increment                 1
+          treemacs-width-is-initially-locked       t
+          treemacs-workspace-switch-cleanup        nil)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode 'always)
+    (when treemacs-python-executable
+      (treemacs-git-commit-diff-mode t))
+
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
+
+    (treemacs-hide-gitignored-files-mode nil))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t)
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :ensure t)
+
+(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))
+
+(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+  :after (treemacs)
+  :ensure t
+  :config (treemacs-set-scope-type 'Tabs))
 
 ;; Which key helper to show keyboard options
 (use-package which-key
@@ -261,7 +386,7 @@ NAME and ARGS are as in `use-package'."
 (setq mu4e-maildir "~/.maildir")
 
 ;; this command is called to sync imap servers:
-(setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
+(setq mu4e-get-mail-command (concat (executable-find "mbsync") " -aV"))
 ;; how often to call it in seconds:
 (setq mu4e-update-interval 300)
 
@@ -312,7 +437,7 @@ NAME and ARGS are as in `use-package'."
 
 ;; show all messages
 (setq mu4e-headers-include-related nil)
-(setq mu4e-headers-results-limit 10000)
+(setq mu4e-headers-results-limit 500)
 
 ;; gpg encryptiom & decryption:
 ;; this can be left alone
@@ -335,7 +460,7 @@ NAME and ARGS are as in `use-package'."
 ;; select the right sender email from the context.
 (setq message-sendmail-envelope-from 'header)
 
-(defun timu/set-msmtp-account ()
+(defun abm/set-msmtp-account ()
   (if (message-mail-p)
       (save-excursion
         (let*
@@ -347,12 +472,12 @@ NAME and ARGS are as in `use-package'."
                ((string-match "adlerbmedrado@icloud.com" from) "icloud"))))
           (setq message-sendmail-extra-arguments (list '"-a" account))))))
 
-(add-hook 'message-send-mail-hook 'timu/set-msmtp-account)
+(add-hook 'message-send-mail-hook 'abm/set-msmtp-account)
 
 ;; mu4e cc & bcc
 ;; this is custom as well
 (add-hook 'mu4e-compose-mode-hook
-          (defun timu/add-cc-and-bcc ()
+          (defun abm/add-cc-and-bcc ()
             "My Function to automatically add Cc & Bcc: headers.
     This is in the mu4e compose mode."
             (save-excursion (message-add-header "Cc:\n"))
@@ -405,29 +530,68 @@ NAME and ARGS are as in `use-package'."
    (:name "Messages with videos" :query "mime:video/*" :key ?v)
    (:name "Messages with audios" :query "mime:audio/*" :key ?a)))
 
-(use-package mu4e-column-faces
-  :after mu4e
-  :config (mu4e-column-faces-mode))
+(add-to-list 'mu4e-header-info-custom
+             '(:empty . (:name "Empty"
+                         :shortname ""
+                         :function (lambda (msg) "  "))))
+(setq mu4e-headers-fields '((:empty         .    2)
+                            (:human-date    .   12)
+                            (:flags         .    6)
+                            (:mailing-list  .   10)
+                            (:from          .   22)
+                            (:subject       .   nil)))
 
-;; (add-to-list 'load-path "packages") ; facultative when installed with make install
-;; (require 'mu4e-thread-folding)
-;; (add-to-list 'mu4e-header-info-custom
-;;              '(:empty . (:name "Empty"
-;;                          :shortname ""
-;;                          :function (lambda (msg) "  "))))
-;; (setq mu4e-headers-fields '((:empty         .    2)
-;;                             (:human-date    .   12)
-;;                             (:flags         .    6)
-;;                             (:mailing-list  .   10)
-;;                             (:from          .   22)
-;;                             (:subject       .   nil)))
+(define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
+(define-key mu4e-headers-mode-map (kbd "<left>")    'mu4e-headers-fold-at-point)
+(define-key mu4e-headers-mode-map (kbd "<S-left>")  'mu4e-headers-fold-all)
+(define-key mu4e-headers-mode-map (kbd "<right>")   'mu4e-headers-unfold-at-point)
+(define-key mu4e-headers-mode-map (kbd "<S-right>") 'mu4e-headers-unfold-all)
 
-;; (define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
-;; (define-key mu4e-headers-mode-map (kbd "<left>")    'mu4e-headers-fold-at-point)
-;; (define-key mu4e-headers-mode-map (kbd "<S-left>")  'mu4e-headers-fold-all)
-;; (define-key mu4e-headers-mode-map (kbd "<right>")   'mu4e-headers-unfold-at-point)
-;; (define-key mu4e-headers-mode-map (kbd "<S-right>") 'mu4e-headers-unfold-all)
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+;; hydra
+(use-package hydra :ensure t)
+
+;; flycheck syntax checker
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-java :ensure t :config (add-hook 'java-mode-hook 'lsp))
+(use-package lsp-ui :ensure t :commands lsp-ui-mode)
+(use-package helm-lsp :ensure t :commands helm-lsp-workspace-symbol)
+(use-package lsp-treemacs :ensure t :commands lsp-treemacs-errors-list)
+
+;; to enable the lenses
+(add-hook 'lsp-mode-hook #'lsp-lens-mode)
+(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+
+;; set Java coding settings
+(setq lsp-java-format-settings-url "https://raw.githubusercontent.com/adlermedrado/styleguide/gh-pages/eclipse-java-google-style.xml")
+(setq lsp-java-format-settings-profile "GoogleStyle")
+(add-hook 'java-mode-hook (defun abm/java-tab-width () (setq c-basic-offset 2)))
+
+;; setup debugger
+;; Java
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+(use-package dap-java :ensure nil)
 
 ;; start the initial frame maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (setq vc-follow-symlinks t)
+
+(provide 'init)
+;;; init.el ends here

@@ -13,6 +13,7 @@ alias tn="tmux new-session -s "
 alias tat="tmux attach -t "
 alias tls="tmux ls"
 alias vim="lvim"
+alias ls="ls -G"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init bash)"
