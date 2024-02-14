@@ -370,6 +370,37 @@ NAME and ARGS are as in `use-package'."
   :ensure t
   :config (which-key-mode))
 
+;; pdftools
+(use-package pdf-tools
+   :defer t
+   :config
+       (pdf-tools-install)
+       (setq-default pdf-view-display-size 'fit-page)
+   :bind (:map pdf-view-mode-map
+         ("\\" . hydra-pdftools/body)
+         ("<s-spc>" .  pdf-view-scroll-down-or-next-page)
+         ("g"  . pdf-view-first-page)
+         ("G"  . pdf-view-last-page)
+         ("l"  . image-forward-hscroll)
+         ("h"  . image-backward-hscroll)
+         ("j"  . pdf-view-next-page)
+         ("k"  . pdf-view-previous-page)
+         ("e"  . pdf-view-goto-page)
+         ("u"  . pdf-view-revert-buffer)
+         ("al" . pdf-annot-list-annotations)
+         ("ad" . pdf-annot-delete)
+         ("aa" . pdf-annot-attachment-dired)
+         ("am" . pdf-annot-add-markup-annotation)
+         ("at" . pdf-annot-add-text-annotation)
+         ("y"  . pdf-view-kill-ring-save)
+         ("i"  . pdf-misc-display-metadata)
+         ("s"  . pdf-occur)
+         ("b"  . pdf-view-set-slice-from-bounding-box)
+         ("r"  . pdf-view-reset-slice)))
+
+(use-package org-pdftools
+  :hook (org-mode . org-pdftools-setup-link))
+
 ;; email config
 ;; load mu4e from the installation path.
 ;; yours might differ check with the Emacs installation
@@ -410,7 +441,12 @@ NAME and ARGS are as in `use-package'."
 	  ("/icloud/Drafts" . ?F)
 	  ("/icloud/Archive". ?A)
 	  ("/icloud/Junk" . ?J)
-	  ("/icloud/Deleted Messages" . ?D)))
+	  ("/icloud/Deleted Messages" . ?D)
+	  ("/gmail/INBOX" . ?g)
+          ("/gmail/[Gmail]/Sent Mail" . ?S)
+	  ("/gmail/Drafts" . ?D)
+	  ("/gmail/Archive" . ?V)
+	  ("/gmail/Trash" . ?R)))
 
 (setq mu4e-contexts
       `(,(make-mu4e-context
@@ -430,7 +466,24 @@ NAME and ARGS are as in `use-package'."
                   (mu4e-refile-folder . "/icloud/Archive")
                   (mu4e-sent-folder . "/icloud/Sent Messages")
 		  (mu4e-junk-folder . "/icloud/Junk") 
-                  (mu4e-trash-folder . "/icloud/Deleted Messages")))))
+                  (mu4e-trash-folder . "/icloud/Deleted Messages")))
+       ,(make-mu4e-context
+          :name "gmail"
+          :enter-func
+          (lambda () (mu4e-message "Enter adlermedrado@gmail.com context"))
+          :leave-func
+          (lambda () (mu4e-message "Leave adlermedrado@gmail.com context"))
+          :match-func
+          (lambda (msg)
+            (when msg
+              (mu4e-message-contact-field-matches msg
+                                                  :to "adlermedrado@gmail.com")))
+          :vars '((user-mail-address . "adlermedrado@gmail.com")
+                  (user-full-name . "Adler Medrado")
+                  (mu4e-drafts-folder . "/gmail/Drafts")
+                  (mu4e-refile-folder . "/gmail/Archive")
+                  (mu4e-sent-folder . "/gmail/Sent")
+                  (mu4e-trash-folder . "/gmail/Trash")))))
 
 (setq mu4e-context-policy 'pick-first) ;; start with the first (default) context;
 (setq mu4e-compose-context-policy 'ask) ;; ask for context if no context matches;
