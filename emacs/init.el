@@ -48,8 +48,6 @@
 (eval-when-compile
   (require 'use-package))
 
-;; https://github.com/raxod502/radian/blob/develop/emacs/radian.el
-
 (defmacro use-feature (name &rest args)
   "Like `use-package', but with `straight-use-package-by-default' disabled.
 NAME and ARGS are as in `use-package'."
@@ -75,9 +73,66 @@ NAME and ARGS are as in `use-package'."
 (display-time-mode 1)
 (winner-mode 1)
 
+;; macOS settings
+(when (eq system-type 'darwin)
+  (message "Setting up keybings for macOS")
+  (setq mac-command-key-is-meta nil	;we want it to be SUPER
+	mac-command-modifier 'super ;⌘=super-key (but can't use s-SPACE,TAB)
+	mac-right-command-modifier 'meta ; meta-f/b are hard to reach otherwise
+	mac-option-modifier 'meta	 ;alt=meta=option
+	mac-right-option-modifier nil ;retain compose characters, düde
+	mac-right-control-modifier 'hyper
+	mac-emulate-three-button-mouse t ; not ideal for secondary selection :(
+	;; mac-mouse-wheel-smooth-scroll t
+	delete-by-moving-to-trash t
+	browse-url-browser-function 'browse-url-default-macosx-browser
+	trash-directory (expand-file-name ".Trash" (getenv "HOME")))
+
+  (bind-keys ("s-s" . save-buffer)
+	     ("s-a" . mark-whole-buffer)
+	     ("s-c" . kill-ring-save)
+	     ("s-m" . suspend-frame)
+	     ("s-t" . (lambda (arg) (interactive "p")
+			(let ((mac-frame-tabbing t))
+			  (if (not (eq arg 4))
+			      (make-frame)
+			    (call-interactively #'find-file-other-frame)))))
+	     ("s-x" . kill-region)
+	     ("s-v" . yank)
+	     ("s-z" . undo-tree-undo)
+	     ("s-w" . delete-frame)
+	     ("s-{" . mac-previous-tab)
+	     ("s-}" . mac-next-tab)
+	     ("S-s-<left>" . mac-previous-tab)
+	     ("S-<swipe-left>" . mac-previous-tab)
+	     ("S-s-<right>" . mac-next-tab)
+	     ("S-<swipe-right>" . mac-next-tab)
+	     ("s-n" . make-frame-command)
+	     ("s-|" . mac-toggle-tab-group-overview)
+	     ("s-M-t" . mac-move-tab-to-new-frame)
+	     ("S-s-M-<right>" . mac-move-tab-right)
+	     ("S-s-M-<left>" . mac-move-tab-left))
+)
+
+;; Terminal emulator
+(use-package vterm
+  :ensure t)
+
+(defun abm/source-bashrc ()
+      (interactive)
+      (vterm-send-string "source ~/.bash_profile"))
+
+(add-hook 'vterm-mode-hook #'abm/source-bashrc)
+
+;; Use my bashrc, etc.
+(setq shell-file-name "bash")
+(setq shell-command-switch "-i")
+
 ;; Manage windows states
 (use-package ace-window
-  :ensure t)
+  :ensure t
+  :defer t)
+
 (global-set-key (kbd "M-o") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
@@ -102,6 +157,7 @@ NAME and ARGS are as in `use-package'."
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-log-done t)
+(setq org-directory "~/org")
 
 ;; Font
 (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 150)
@@ -114,8 +170,11 @@ NAME and ARGS are as in `use-package'."
 (global-display-line-numbers-mode 1)
 (add-hook 'mu4e-headers-mode-hook (lambda () (display-line-numbers-mode 0)))
 (add-hook 'mu4e-main-mode-hook (lambda () (display-line-numbers-mode 0)))
+(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode 0)))
+(add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0)))
 
 (use-package hl-line
+  :defer t
   :config
   (global-hl-line-mode t))
 
@@ -133,6 +192,7 @@ NAME and ARGS are as in `use-package'."
 
 (use-package company
   :straight t
+  :defer t
   :demand t
   :commands (company-mode company-indent-or-complete-common)
   :config
@@ -168,6 +228,7 @@ NAME and ARGS are as in `use-package'."
 ;; Project organization
 (use-package projectile
   :ensure t
+  :defer t
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -179,6 +240,7 @@ NAME and ARGS are as in `use-package'."
 
 ;; Incremental completions
 (use-package helm
+  :defer t
   :straight t
   :diminish
   :bind (("C-h a"   . helm-apropos)
@@ -229,6 +291,7 @@ NAME and ARGS are as in `use-package'."
                           'helm-eshell-history))))
 
 (use-package magit
+  :defer t
   :straight t
   :bind
   (("C-x g" . magit-status))
@@ -237,15 +300,18 @@ NAME and ARGS are as in `use-package'."
         magit-bury-buffer-function 'magit-restore-window-configuration))
 
 (use-package forge
+  :defer t
   :straight t
   :after magit)
 
 (use-package git-timemachine
   :straight t
-  :after magit)
+  :after magit
+  :defer t)
 
 (use-package perspective
   :straight t
+  :defer t
   :custom
   (persp-mode-prefix-key (kbd "C-x x"))
   :config
@@ -368,6 +434,7 @@ NAME and ARGS are as in `use-package'."
 ;; Which key helper to show keyboard options
 (use-package which-key
   :ensure t
+  :defer t
   :config (which-key-mode))
 
 ;; pdftools
