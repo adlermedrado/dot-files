@@ -1,5 +1,4 @@
 export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Contents/MacOS':opt/homebrew/sbin:$PATH"
-export EDITOR="lvim"
 export GREP_OPTIONS="--color=always"
 export CLICOLOR="--color=auto"
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -12,8 +11,9 @@ alias brewupd="brew upgrade && brew cleanup"
 alias tn="tmux new-session -s "
 alias tat="tmux attach -t "
 alias tls="tmux ls"
-alias vim="lvim"
 alias ls="ls -G"
+alias emacs='$(/opt/homebrew/opt/emacs-mac/Emacs.app/Contents/MacOS/Emacs "$@")'
+alias vim='nvim'
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init bash)"
@@ -25,8 +25,6 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-source <(op completion bash)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

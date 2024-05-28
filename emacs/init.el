@@ -60,8 +60,7 @@ NAME and ARGS are as in `use-package'."
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(setq-default message-log-max nil)
-(kill-buffer "*Messages*")
+(setq-default message-log-max 10000)
 
 ;; window size
 (add-to-list 'default-frame-alist '(height . 26))
@@ -72,6 +71,11 @@ NAME and ARGS are as in `use-package'."
 (cua-mode 1)
 (display-time-mode 1)
 (winner-mode 1)
+
+;; set shell env
+(use-package exec-path-from-shell :ensure t)
+(exec-path-from-shell-initialize)
+
 
 ;; macOS settings
 (when (eq system-type 'darwin)
@@ -125,13 +129,12 @@ NAME and ARGS are as in `use-package'."
 (add-hook 'vterm-mode-hook #'abm/source-bashrc)
 
 ;; Use my bashrc, etc.
-(setq shell-file-name "bash")
+;; (setq shell-file-name "bash")
 (setq shell-command-switch "-i")
 
 ;; Manage windows states
 (use-package ace-window
-  :ensure t
-  :defer t)
+  :ensure t)
 
 (global-set-key (kbd "M-o") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -174,7 +177,6 @@ NAME and ARGS are as in `use-package'."
 (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0)))
 
 (use-package hl-line
-  :defer t
   :config
   (global-hl-line-mode t))
 
@@ -192,7 +194,6 @@ NAME and ARGS are as in `use-package'."
 
 (use-package company
   :straight t
-  :defer t
   :demand t
   :commands (company-mode company-indent-or-complete-common)
   :config
@@ -228,7 +229,6 @@ NAME and ARGS are as in `use-package'."
 ;; Project organization
 (use-package projectile
   :ensure t
-  :defer t
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -240,7 +240,6 @@ NAME and ARGS are as in `use-package'."
 
 ;; Incremental completions
 (use-package helm
-  :defer t
   :straight t
   :diminish
   :bind (("C-h a"   . helm-apropos)
@@ -291,7 +290,6 @@ NAME and ARGS are as in `use-package'."
                           'helm-eshell-history))))
 
 (use-package magit
-  :defer t
   :straight t
   :bind
   (("C-x g" . magit-status))
@@ -300,18 +298,15 @@ NAME and ARGS are as in `use-package'."
         magit-bury-buffer-function 'magit-restore-window-configuration))
 
 (use-package forge
-  :defer t
   :straight t
   :after magit)
 
 (use-package git-timemachine
   :straight t
-  :after magit
-  :defer t)
+  :after magit)
 
 (use-package perspective
   :straight t
-  :defer t
   :custom
   (persp-mode-prefix-key (kbd "C-x x"))
   :config
@@ -322,7 +317,6 @@ NAME and ARGS are as in `use-package'."
 
 (use-package treemacs
   :ensure t
-  :defer t
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
@@ -434,12 +428,10 @@ NAME and ARGS are as in `use-package'."
 ;; Which key helper to show keyboard options
 (use-package which-key
   :ensure t
-  :defer t
   :config (which-key-mode))
 
 ;; pdftools
 (use-package pdf-tools
-   :defer t
    :config
        (pdf-tools-install)
        (setq-default pdf-view-display-size 'fit-page)
@@ -478,6 +470,9 @@ NAME and ARGS are as in `use-package'."
 (require 'smtpmail)
 
 ;; we installed this with homebrew
+(unless (executable-find "mu")
+  (warn! "Couldn't find mu command. Mu4e requires this to work."))
+ 
 (setq mu4e-mu-binary (executable-find "mu"))
 
 ;; this is the directory we created before:
