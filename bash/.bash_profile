@@ -12,7 +12,8 @@ alias tn="tmux new-session -s "
 alias tat="tmux attach -t "
 alias tls="tmux ls"
 alias ls="ls -G"
-alias emacs='$(/opt/homebrew/opt/emacs-mac/Emacs.app/Contents/MacOS/Emacs "$@")'
+alias emacs="/opt/homebrew/opt/emacs-plus@29/bin/emacs"
+alias emacsclient="/opt/homebrew/opt/emacs-plus@29/bin/emacsclient"
 alias vim='nvim'
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
