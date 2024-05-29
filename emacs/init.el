@@ -57,7 +57,7 @@ NAME and ARGS are as in `use-package'."
      ,@args))
 
 ;; Remove menus, setup GUI
-(menu-bar-mode -1)
+;; (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq-default message-log-max 10000)
@@ -171,8 +171,8 @@ NAME and ARGS are as in `use-package'."
 
 ;; Enable line numbers
 (global-display-line-numbers-mode 1)
-(add-hook 'mu4e-headers-mode-hook (lambda () (display-line-numbers-mode 0)))
-(add-hook 'mu4e-main-mode-hook (lambda () (display-line-numbers-mode 0)))
+;; (add-hook 'mu4e-headers-mode-hook (lambda () (display-line-numbers-mode 0)))
+;; (add-hook 'mu4e-main-mode-hook (lambda () (display-line-numbers-mode 0)))
 (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode 0)))
 (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0)))
 
@@ -210,14 +210,11 @@ NAME and ARGS are as in `use-package'."
   :ensure t)
 
 ;; Theme
-(use-package autothemer :ensure t)
+(use-package solo-jazz-theme
+  :ensure t
+  :config
+  (load-theme 'solo-jazz t))
 
-(straight-use-package
- '(rose-pine-emacs
-   :host github
-   :repo "thongpv87/rose-pine-emacs"
-   :branch "master"))
-(load-theme 'rose-pine-dawn t)
 ;; Modeline
 (use-package doom-modeline
   :ensure t
@@ -337,7 +334,7 @@ NAME and ARGS are as in `use-package'."
           treemacs-hide-dot-git-directory          t
           treemacs-indentation                     2
           treemacs-indentation-string              " "
-          treemacs-is-never-other-window           nil
+          treemacs-is-never-othe-window           nil
           treemacs-max-git-entries                 5000
           treemacs-missing-project-action          'ask
           treemacs-move-forward-on-expand          nil
@@ -460,96 +457,95 @@ NAME and ARGS are as in `use-package'."
 ;; email config
 ;; load mu4e from the installation path.
 ;; yours might differ check with the Emacs installation
-(use-package mu4e
-  :load-path  "/opt/homebrew/Cellar/mu/1.10.8/share/emacs/site-lisp/mu/mu4e/")
+;; (use-package mu4e
+;;   :load-path  "/opt/homebrew/Cellar/mu/1.10.8/share/emacs/site-lisp/mu/mu4e/")
 
 ;; for sending mails
 (require 'smtpmail)
 
 ;; we installed this with homebrew
-(unless (executable-find "mu")
-  (warn! "Couldn't find mu command. Mu4e requires this to work."))
+;; (unless (executable-find "mu")
+;;   (warn! "Couldn't find mu command. Mu4e requires this to work."))
 
-(setq mu4e-mu-binary (executable-find "mu"))
+;; (setq mu4e-mu-binary (executable-find "mu"))
 
 ;; this is the directory we created before:
-(setq mu4e-maildir "~/.maildir")
+;; (setq mu4e-maildir "~/.maildir")
 
 ;; this command is called to sync imap servers:
-(setq mu4e-get-mail-command (concat (executable-find "mbsync") " -aV"))
+;; (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -aV"))
 ;; how often to call it in seconds:
-(setq mu4e-update-interval 300)
+;; (setq mu4e-update-interval 300)
 
 ;; save attachment to desktop by default
 ;; or another choice of yours:
-(setq mu4e-attachment-dir "~/Desktop")
+;; (setq mu4e-attachment-dir "~/Desktop")
 
 ;; rename files when moving - needed for mbsync:
-(setq mu4e-change-filenames-when-moving t)
+;; (setq mu4e-change-filenames-when-moving t)
 
 ;; list of your email adresses:
-(setq mu4e-user-mail-address-list '("adlerbmedrado@icloud.com"))
+;; (setq mu4e-user-mail-address-list '("adlerbmedrado@icloud.com"))
 
 ;; Format mu4e header date
-(setq mu4e-date-format "%y-%m-%d")
-(setq mu4e-headers-date-format "%Y-%m-%d")
+;; (setq mu4e-date-format "%y-%m-%d")
 
-(setq mu4e-maildir-shortcuts
-        '(("/icloud/INBOX" . ?i)
-          ("/icloud/Sent Messages" . ?I)
-	  ("/icloud/Drafts" . ?F)
-	  ("/icloud/Archive". ?A)
-	  ("/icloud/Junk" . ?J)
-	  ("/icloud/Deleted Messages" . ?D)
-	  ("/gmail/INBOX" . ?g)
-          ("/gmail/[Gmail]/Sent Mail" . ?S)
-	  ("/gmail/Drafts" . ?D)
-	  ("/gmail/Archive" . ?V)
-	  ("/gmail/Trash" . ?R)))
+;; (setq mu4e-maildir-shortcuts
+;;         '(("/icloud/INBOX" . ?i)
+;;           ("/icloud/Sent Messages" . ?I)
+;; 	  ("/icloud/Drafts" . ?F)
+;; 	  ("/icloud/Archive". ?A)
+;; 	  ("/icloud/Junk" . ?J)
+;; 	  ("/icloud/Deleted Messages" . ?D)
+;; 	  ("/gmail/INBOX" . ?g)
+;;           ("/gmail/[Gmail]/Sent Mail" . ?S)
+;; 	  ("/gmail/Drafts" . ?D)
+;; 	  ("/gmail/Archive" . ?V)
+;; 	  ("/gmail/Trash" . ?R)))
 
-(setq mu4e-contexts
-      `(,(make-mu4e-context
-          :name "icloud"
-          :enter-func
-          (lambda () (mu4e-message "Enter adlerbmedrado@icloud.com context"))
-          :leave-func
-          (lambda () (mu4e-message "Leave adlerbmedrado@icloud.com context"))
-          :match-func
-          (lambda (msg)
-            (when msg
-              (mu4e-message-contact-field-matches msg
-                                                  :to "adlerbmedrado@icloud.com")))
-          :vars '((user-mail-address . "adler@adlermedrado.com.br" )
-                  (user-full-name . "Adler Medrado")
-                  (mu4e-drafts-folder . "/icloud/Drafts")
-                  (mu4e-refile-folder . "/icloud/Archive")
-                  (mu4e-sent-folder . "/icloud/Sent Messages")
-		  (mu4e-junk-folder . "/icloud/Junk")
-                  (mu4e-trash-folder . "/icloud/Deleted Messages")))
-       ,(make-mu4e-context
-          :name "gmail"
-          :enter-func
-          (lambda () (mu4e-message "Enter adlermedrado@gmail.com context"))
-          :leave-func
-          (lambda () (mu4e-message "Leave adlermedrado@gmail.com context"))
-          :match-func
-          (lambda (msg)
-            (when msg
-              (mu4e-message-contact-field-matches msg
-                                                  :to "adlermedrado@gmail.com")))
-          :vars '((user-mail-address . "adlermedrado@gmail.com")
-                  (user-full-name . "Adler Medrado")
-                  (mu4e-drafts-folder . "/gmail/Drafts")
-                  (mu4e-refile-folder . "/gmail/Archive")
-                  (mu4e-sent-folder . "/gmail/Sent")
-                  (mu4e-trash-folder . "/gmail/Trash")))))
-
-(setq mu4e-context-policy 'pick-first) ;; start with the first (default) context;
-(setq mu4e-compose-context-policy 'ask) ;; ask for context if no context matches;
+;; (setq mu4e-contexts
+;;       `(,(make-mu4e-context
+;;           :name "icloud"
+;;           :enter-func
+;;           (lambda () (mu4e-message "Enter adlerbmedrado@icloud.com context"))
+;;           :leave-func
+;;           (lambda () (mu4e-message "Leave adlerbmedrado@icloud.com context"))
+;;           :match-func
+;;           (lambda (msg)
+;;             (when msg
+;;               (mu4e-message-contact-field-matches msg
+;;                                                   :to "adlerbmedrado@icloud.com")))
+;;           :vars '((user-mail-address . "adler@adlermedrado.com.br" )
+;;                   (user-full-name . "Adler Medrado")
+;;                   (mu4e-drafts-folder . "/icloud/Drafts")
+;;                   (mu4e-refile-folder . "/icloud/Archive")
+;;                   (mu4e-sent-folder . "/icloud/Sent Messages")
+;; 		  (mu4e-junk-folder . "/icloud/Junk")
+;;                   (mu4e-trash-folder . "/icloud/Deleted Messages")))
+;;        ,(make-mu4e-context
+;;           :name "gmail"
+;;           :enter-func
+;;           (lambda () (mu4e-message "Enter adlermedrado@gmail.com context"))
+;;           :leave-func
+;;           (lambda () (mu4e-message "Leave adlermedrado@gmail.com context"))
+;;           :match-func
+;;           (lambda (msg)
+;;             (when msg
+;;               (mu4e-message-contact-field-matches msg
+;;                                                   :to "adlermedrado@gmail.com")))
+;;           :vars '((user-mail-address . "adlermedrado@gmail.com")
+;;                   (user-full-name . "Adler Medrado")
+;;                   (mu4e-drafts-folder . "/gmail/Drafts")
+;;                   (mu4e-refile-folder . "/gmail/Archive")
+;;                   (mu4e-sent-folder . "/gmail/Sent")
+;;                   (mu4e-trash-folder . "/gmail/Trash")))))
+;;
+;; (setq mu4e-context-policy 'pick-first) ;; start with the first (default) context;
+;; (setq mu4e-compose-context-policy 'ask) ;; ask for context if no context matches;
 
 ;; show all messages
-(setq mu4e-headers-include-related nil)
-(setq mu4e-headers-results-limit 500)
+;; (setq mu4e-headers-include-related nil)
+;; (setq mu4e-headers-results-limit 500)
 
 ;; gpg encryptiom & decryption:
 ;; this can be left alone
@@ -588,76 +584,76 @@ NAME and ARGS are as in `use-package'."
 
 ;; mu4e cc & bcc
 ;; this is custom as well
-(add-hook 'mu4e-compose-mode-hook
-          (defun abm/add-cc-and-bcc ()
-            "My Function to automatically add Cc & Bcc: headers.
-    This is in the mu4e compose mode."
-            (save-excursion (message-add-header "Cc:\n"))
-            (save-excursion (message-add-header "Bcc:\n"))))
+;; (add-hook 'mu4e-compose-mode-hook
+;;           (defun abm/add-cc-and-bcc ()
+;;             "My Function to automatically add Cc & Bcc: headers.
+;;     This is in the mu4e compose mode."
+;;             (save-excursion (message-add-header "Cc:\n"))
+;;             (save-excursion (message-add-header "Bcc:\n"))))
 
 ;; mu4e address completion
-(add-hook 'mu4e-compose-mode-hook 'company-mode)
+;; (add-hook 'mu4e-compose-mode-hook 'company-mode)
 
 ;; store link to message if in header view, not to header query:
-(setq org-mu4e-link-query-in-headers-mode nil)
+;; (setq org-mu4e-link-query-in-headers-mode nil)
 ;; don't have to confirm when quitting:
-(setq mu4e-confirm-quit nil)
+;; (setq mu4e-confirm-quit nil)
 ;; number of visible headers in horizontal split view:
-(setq mu4e-headers-visible-lines 20)
+;; (setq mu4e-headers-visible-lines 20)
 ;; don't show threading by default:
-(setq mu4e-headers-show-threads nil)
+;; (setq mu4e-headers-show-threads nil)
 ;; hide annoying "mu4e Retrieving mail..." msg in mini buffer:
-(setq mu4e-hide-index-messages t)
+;; (setq mu4e-hide-index-messages t)
 ;; customize the reply-quote-string:
-(setq message-citation-line-format "%N @ %Y-%m-%d %H:%M :\n")
+;; (setq message-citation-line-format "%N @ %Y-%m-%d %H:%M :\n")
 ;; M-x find-function RET message-citation-line-format for docs:
-(setq message-citation-line-function 'message-insert-formatted-citation-line)
+;; (setq message-citation-line-function 'message-insert-formatted-citation-line)
 ;; by default do not show related emails:
-(setq mu4e-headers-include-related nil)
+;; (setq mu4e-headers-include-related nil)
 ;; by default do not show threads:
-(setq mu4e-headers-show-threads nil)
+;; (setq mu4e-headers-show-threads nil)
 
 ;;; mu4e bookmarks
-(customize-set-variable
- 'mu4e-bookmarks
- '((:name "iCloud - Unread"
-          :query "maildir:/icloud/INBOX flag:unread"
-          :hide t
-          :key ?I)
-   (:name "iCloud"
-          :query "maildir:/icloud/INBOX"
-          :key ?i)
-   (:name "Spam - All"
-          :query "maildir:/icloud/Junk"
-          :key ?s)
-   (:name "Trash - All"
-          :query "maildir:\"/icloud/Deleted Messages\""
-          :key ?b)
-   (:name "Unread messages"
-          :query "flag:unread AND NOT flag:trashed"
-          :key ?u)
-   (:name "Today's messages" :query "date:today..now" :key ?d)
-   (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
-   (:name "Messages with images" :query "mime:image/*" :key ?p)
-   (:name "Messages with videos" :query "mime:video/*" :key ?v)
-   (:name "Messages with audios" :query "mime:audio/*" :key ?a)))
-
-(add-to-list 'mu4e-header-info-custom
-             '(:empty . (:name "Empty"
-                         :shortname ""
-                         :function (lambda (msg) "  "))))
-(setq mu4e-headers-fields '((:empty         .    2)
-                            (:human-date    .   12)
-                            (:flags         .    6)
-                            (:mailing-list  .   10)
-                            (:from          .   22)
-                            (:subject       .   nil)))
-
-(define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
-(define-key mu4e-headers-mode-map (kbd "<left>")    'mu4e-headers-fold-at-point)
-(define-key mu4e-headers-mode-map (kbd "<S-left>")  'mu4e-headers-fold-all)
-(define-key mu4e-headers-mode-map (kbd "<right>")   'mu4e-headers-unfold-at-point)
-(define-key mu4e-headers-mode-map (kbd "<S-right>") 'mu4e-headers-unfold-all)
+;; (customize-set-variable
+;;  'mu4e-bookmarks
+;;  '((:name "iCloud - Unread"
+;;           :query "maildir:/icloud/INBOX flag:unread"
+;;           :hide t
+;;           :key ?I)
+;;    (:name "iCloud"
+;;           :query "maildir:/icloud/INBOX"
+;;           :key ?i)
+;;    (:name "Spam - All"
+;;           :query "maildir:/icloud/Junk"
+;;           :key ?s)
+;;    (:name "Trash - All"
+;;           :query "maildir:\"/icloud/Deleted Messages\""
+;;           :key ?b)
+;;    (:name "Unread messages"
+;;           :query "flag:unread AND NOT flag:trashed"
+;;           :key ?u)
+;;    (:name "Today's messages" :query "date:today..now" :key ?d)
+;;    (:name "Last 7 days" :query "date:7d..now" :hide-unread t :key ?w)
+;;    (:name "Messages with images" :query "mime:image/*" :key ?p)
+;;    (:name "Messages with videos" :query "mime:video/*" :key ?v)
+;;    (:name "Messages with audios" :query "mime:audio/*" :key ?a)))
+;;
+;; (add-to-list 'mu4e-header-info-custom
+;;              '(:empty . (:name "Empty"
+;;                          :shortname ""
+;;                          :function (lambda (msg) "  "))))
+;; (setq mu4e-headers-fields '((:empty         .    2)
+;;                             (:human-date    .   12)
+;;                             (:flags         .    6)
+;;                             (:mailing-list  .   10)
+;;                             (:from          .   22)
+;;                             (:subject       .   nil)))
+;;
+;; (define-key mu4e-headers-mode-map (kbd "<tab>")     'mu4e-headers-toggle-at-point)
+;; (define-key mu4e-headers-mode-map (kbd "<left>")    'mu4e-headers-fold-at-point)
+;; (define-key mu4e-headers-mode-map (kbd "<S-left>")  'mu4e-headers-fold-all)
+;; (define-key mu4e-headers-mode-map (kbd "<right>")   'mu4e-headers-unfold-at-point)
+;; (define-key mu4e-headers-mode-map (kbd "<S-right>") 'mu4e-headers-unfold-all)
 
 (use-package yasnippet
   :ensure t
