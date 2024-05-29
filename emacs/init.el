@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;
 ;; Adler Medrado' Emacs Config.
-;; 
+;;
 
 ;; init file tips/examples:
 ;; https://github.com/ebellani/Emacs.d/blob/master/init.el
@@ -210,17 +210,14 @@ NAME and ARGS are as in `use-package'."
   :ensure t)
 
 ;; Theme
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t 
-        doom-themes-enable-italic t)
-  (load-theme 'doom-tokyo-night t)
+(use-package autothemer :ensure t)
 
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-    (doom-themes-org-config))
-
+(straight-use-package
+ '(rose-pine-emacs
+   :host github
+   :repo "thongpv87/rose-pine-emacs"
+   :branch "master"))
+(load-theme 'rose-pine-dawn t)
 ;; Modeline
 (use-package doom-modeline
   :ensure t
@@ -234,7 +231,7 @@ NAME and ARGS are as in `use-package'."
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/git/")
-	;; projectile-switch-project-action 'neotree-projectile-action 
+	;; projectile-switch-project-action 'neotree-projectile-action
 	projectile-indexing-method 'alien
 	projectile-use-git-grep 1))
 
@@ -472,7 +469,7 @@ NAME and ARGS are as in `use-package'."
 ;; we installed this with homebrew
 (unless (executable-find "mu")
   (warn! "Couldn't find mu command. Mu4e requires this to work."))
- 
+
 (setq mu4e-mu-binary (executable-find "mu"))
 
 ;; this is the directory we created before:
@@ -527,7 +524,7 @@ NAME and ARGS are as in `use-package'."
                   (mu4e-drafts-folder . "/icloud/Drafts")
                   (mu4e-refile-folder . "/icloud/Archive")
                   (mu4e-sent-folder . "/icloud/Sent Messages")
-		  (mu4e-junk-folder . "/icloud/Junk") 
+		  (mu4e-junk-folder . "/icloud/Junk")
                   (mu4e-trash-folder . "/icloud/Deleted Messages")))
        ,(make-mu4e-context
           :name "gmail"
