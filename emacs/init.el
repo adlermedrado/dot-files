@@ -210,10 +210,14 @@ NAME and ARGS are as in `use-package'."
   :ensure t)
 
 ;; Theme
-(use-package solo-jazz-theme
-  :ensure t
-  :config
-  (load-theme 'solo-jazz t))
+(use-package autothemer :ensure t)
+
+(straight-use-package
+ '(rose-pine-emacs
+   :host github
+   :repo "thongpv87/rose-pine-emacs"
+   :branch "master"))
+(load-theme 'rose-pine-color t)
 
 ;; Modeline
 (use-package doom-modeline
@@ -461,7 +465,7 @@ NAME and ARGS are as in `use-package'."
 ;;   :load-path  "/opt/homebrew/Cellar/mu/1.10.8/share/emacs/site-lisp/mu/mu4e/")
 
 ;; for sending mails
-(require 'smtpmail)
+;;(require 'smtpmail)
 
 ;; we installed this with homebrew
 ;; (unless (executable-find "mu")
@@ -563,24 +567,24 @@ NAME and ARGS are as in `use-package'."
 
 ;; send program:
 ;; this is exeranal. remember we installed it before.
-(setq sendmail-program (executable-find "msmtp"))
+;;(setq sendmail-program (executable-find "msmtp"))
 
 ;; select the right sender email from the context.
-(setq message-sendmail-envelope-from 'header)
+;;(setq message-sendmail-envelope-from 'header)
 
-(defun abm/set-msmtp-account ()
-  (if (message-mail-p)
-      (save-excursion
-        (let*
-            ((from (save-restriction
-                     (message-narrow-to-headers)
-                     (message-fetch-field "from")))
-             (account
-              (cond
-               ((string-match "adlerbmedrado@icloud.com" from) "icloud"))))
-          (setq message-sendmail-extra-arguments (list '"-a" account))))))
+;;(defun abm/set-msmtp-account ()
+;;  (if (message-mail-p)
+;;      (save-excursion
+;;        (let*
+;;            ((from (save-restriction
+;;                     (message-narrow-to-headers)
+;;                     (message-fetch-field "from")))
+;;             (account
+;;              (cond
+;;               ((string-match "adlerbmedrado@icloud.com" from) "icloud"))))
+;;          (setq message-sendmail-extra-arguments (list '"-a" account))))))
 
-(add-hook 'message-send-mail-hook 'abm/set-msmtp-account)
+;;(add-hook 'message-send-mail-hook 'abm/set-msmtp-account)
 
 ;; mu4e cc & bcc
 ;; this is custom as well
@@ -672,30 +676,33 @@ NAME and ARGS are as in `use-package'."
   :ensure t
   :init (global-flycheck-mode))
 
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
-
-(use-package lsp-java :ensure t :config (add-hook 'java-mode-hook 'lsp))
-(use-package lsp-ui :ensure t :commands lsp-ui-mode)
-(use-package helm-lsp :ensure t :commands helm-lsp-workspace-symbol)
-(use-package lsp-treemacs :ensure t :commands lsp-treemacs-errors-list)
-
-;; to enable the lenses
-(add-hook 'lsp-mode-hook #'lsp-lens-mode)
-(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-
-;; set Java coding settings
-(setq lsp-java-format-settings-url "https://raw.githubusercontent.com/adlermedrado/styleguide/gh-pages/eclipse-java-google-style.xml")
-(setq lsp-java-format-settings-profile "GoogleStyle")
-(add-hook 'java-mode-hook (defun abm/java-tab-width () (setq c-basic-offset 2)))
-
-;; setup debugger
-;; Java
-(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
-(use-package dap-java :ensure nil)
+;;; Tree-sitter support
+;; https://git.savannah.gnu.org/cgit/emacs.git/tree/admin/notes/tree-sitter/starter-guide?h=emacs-29
+(use-package treesit
+  :when (and (fboundp 'treesit-available-p)
+             (treesit-available-p))
+  :custom (major-mode-remap-alist
+           '((c-mode          . c-ts-mode)
+             (c++-mode        . c++-ts-mode)
+             (csharp-mode     . csharp-ts-mode)
+             (conf-toml-mode  . toml-ts-mode)
+             (css-mode        . css-ts-mode)
+             (java-mode       . java-ts-mode)
+             (javascript-mode . js-ts-mode)
+             (js-json-mode    . json-ts-mode)
+             (python-mode     . python-ts-mode)
+             (ruby-mode       . ruby-ts-mode)
+             (sh-mode         . bash-ts-mode)
+	     (org-mode        . org-ts-mode)
+	     
+	     ))
+  
+  :config
+  (add-to-list 'auto-mode-alist '("\\(?:CMakeLists\\.txt\\|\\.cmake\\)\\'" . cmake-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode)))
 
 ;; start the initial frame maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
