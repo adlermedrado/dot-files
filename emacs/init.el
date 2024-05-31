@@ -210,14 +210,10 @@ NAME and ARGS are as in `use-package'."
   :ensure t)
 
 ;; Theme
-(use-package autothemer :ensure t)
-
-(straight-use-package
- '(rose-pine-emacs
-   :host github
-   :repo "thongpv87/rose-pine-emacs"
-   :branch "master"))
-(load-theme 'rose-pine-color t)
+(use-package solo-jazz-theme
+   :ensure t
+   :config
+   (load-theme 'solo-jazz t))
 
 ;; Modeline
 (use-package doom-modeline
@@ -694,9 +690,9 @@ NAME and ARGS are as in `use-package'."
              (ruby-mode       . ruby-ts-mode)
              (sh-mode         . bash-ts-mode)
 	     (org-mode        . org-ts-mode)
-	     
+
 	     ))
-  
+
   :config
   (add-to-list 'auto-mode-alist '("\\(?:CMakeLists\\.txt\\|\\.cmake\\)\\'" . cmake-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
