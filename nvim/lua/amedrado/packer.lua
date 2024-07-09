@@ -13,10 +13,10 @@ return require('packer').startup(function(use)
     }
 
     use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
+        'folke/tokyonight.nvim',
+        as = 'tokyonight',
         config = function()
-            vim.cmd('colorscheme rose-pine')
+            vim.cmd('colorscheme tokyonight')
         end
     })
 

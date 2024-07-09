@@ -2,6 +2,7 @@ export PATH="/$HOME/bin:$HOME/.local/bin:'/Applications/IntelliJ IDEA.app/Conten
 export GREP_OPTIONS="--color=always"
 export CLICOLOR="--color=auto"
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export PYENV_ROOT="$HOME/.pyenv"
 
 HISTSIZE=10000
 HISTFILESIZE=10000
@@ -28,6 +29,9 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
