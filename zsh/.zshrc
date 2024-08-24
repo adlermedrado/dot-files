@@ -1,3 +1,6 @@
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 # starship config
 export STARSHIP_CONFIG=~/code/dot-files/starship.toml
 eval "$(starship init zsh)"
@@ -17,3 +20,6 @@ alias tat="tmux attach -t "
 alias tls="tmux ls"
 alias ls="ls -G"
 alias vim='nvim'
+
+# Created by `pipx` on 2024-08-07 22:44:29
+export PATH="$PATH:/Users/amedrado/.local/bin"

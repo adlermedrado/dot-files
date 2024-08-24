@@ -5,34 +5,10 @@
 ;; Adler Medrado' Emacs Config.
 ;;
 
-;; init file tips/examples:
-;; https://github.com/ebellani/Emacs.d/blob/master/init.el
-;; https://github.com/dunossauro/dotfiles/blob/main/.emacs.d/init.el
-;; https://macowners.club/posts/email-emacs-mu4e-macos/
-
 ;;; Code:
 
 ;; set load-path
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
-
-;; Configure straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
 
 ;; Install use-package
 (require 'package)
@@ -47,14 +23,6 @@
 
 (eval-when-compile
   (require 'use-package))
-
-(defmacro use-feature (name &rest args)
-  "Like `use-package', but with `straight-use-package-by-default' disabled.
-NAME and ARGS are as in `use-package'."
-  (declare (indent defun))
-  `(use-package ,name
-     :straight nil
-     ,@args))
 
 ;; Remove menus, setup GUI
 ;; (menu-bar-mode -1)
@@ -76,18 +44,20 @@ NAME and ARGS are as in `use-package'."
 (use-package exec-path-from-shell :ensure t)
 (exec-path-from-shell-initialize)
 
+;; Theming
+(use-package solarized-theme
+  :ensure t)
+
+(load-theme 'solarized-light t)
 
 ;; macOS settings
 (when (eq system-type 'darwin)
   (message "Setting up keybings for macOS")
-  (setq mac-command-key-is-meta nil	;we want it to be SUPER
-	mac-command-modifier 'super ;⌘=super-key (but can't use s-SPACE,TAB)
+  (setq mac-command-modifier 'super ;⌘=super-key (but can't use s-SPACE,TAB)
 	mac-right-command-modifier 'meta ; meta-f/b are hard to reach otherwise
 	mac-option-modifier 'meta	 ;alt=meta=option
 	mac-right-option-modifier nil ;retain compose characters, düde
 	mac-right-control-modifier 'hyper
-	mac-emulate-three-button-mouse t ; not ideal for secondary selection :(
-	;; mac-mouse-wheel-smooth-scroll t
 	delete-by-moving-to-trash t
 	browse-url-browser-function 'browse-url-default-macosx-browser
 	trash-directory (expand-file-name ".Trash" (getenv "HOME")))
@@ -103,41 +73,51 @@ NAME and ARGS are as in `use-package'."
 			    (call-interactively #'find-file-other-frame)))))
 	     ("s-x" . kill-region)
 	     ("s-v" . yank)
-	     ("s-z" . undo-tree-undo)
 	     ("s-w" . delete-frame)
-	     ("s-{" . mac-previous-tab)
-	     ("s-}" . mac-next-tab)
-	     ("S-s-<left>" . mac-previous-tab)
-	     ("S-<swipe-left>" . mac-previous-tab)
-	     ("S-s-<right>" . mac-next-tab)
-	     ("S-<swipe-right>" . mac-next-tab)
-	     ("s-n" . make-frame-command)
-	     ("s-|" . mac-toggle-tab-group-overview)
-	     ("s-M-t" . mac-move-tab-to-new-frame)
-	     ("S-s-M-<right>" . mac-move-tab-right)
-	     ("S-s-M-<left>" . mac-move-tab-left))
+	     ("s-n" . make-frame-command))
 )
+
+;; Projectile
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (projectile-mode +1)
+  (setq projectile-project-search-path '("~/code/"))
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-completion-system 'ivy)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :bind (("C-s" . swiper)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c k" . counsel-rg)
+         ("C-c f" . counsel-recentf)
+         ("C-x b" . ivy-switch-buffer))
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t))
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :config
+  (counsel-mode 1))
+
+(use-package swiper
+  :ensure t
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
 
 ;; Terminal emulator
 (use-package vterm
   :ensure t)
-
-(defun abm/source-bashrc ()
-      (interactive)
-      (vterm-send-string "source ~/.bash_profile"))
-
-(add-hook 'vterm-mode-hook #'abm/source-bashrc)
-
-;; Use my bashrc, etc.
-;; (setq shell-file-name "bash")
-(setq shell-command-switch "-i")
-
-;; Manage windows states
-(use-package ace-window
-  :ensure t)
-
-(global-set-key (kbd "M-o") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
 ;; Buffer Tabs
 (use-package centaur-tabs
@@ -151,7 +131,6 @@ NAME and ARGS are as in `use-package'."
 (setq centaur-tabs-set-icons t)
 (setq centaur-tabs-gray-out-icons 'buffer)
 (setq centaur-tabs-set-bar 'left)
-(centaur-tabs-headline-match)
 
 ;;;;Org mode configuration
 ;; Enable Org mode
@@ -174,11 +153,6 @@ NAME and ARGS are as in `use-package'."
 ;; (add-hook 'mu4e-headers-mode-hook (lambda () (display-line-numbers-mode 0)))
 ;; (add-hook 'mu4e-main-mode-hook (lambda () (display-line-numbers-mode 0)))
 (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode 0)))
-(add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0)))
-
-(use-package hl-line
-  :config
-  (global-hl-line-mode t))
 
 ;; Remove welcome buffer
 (setq inhibit-startup-message t
@@ -186,273 +160,60 @@ NAME and ARGS are as in `use-package'."
       initial-buffer-choice  nil
       initial-scratch-message nil
       auto-save-default nil
-      make-backup-files nil
-      ido-enable-flex-matching t)
+      make-backup-files nil)
 
 ;; Update buffers
 (global-auto-revert-mode t)
 
-(use-package company
-  :straight t
-  :demand t
-  :commands (company-mode company-indent-or-complete-common)
-  :config
-  (setf company-idle-delay 0
-	company-minimum-prefix-length 1
-        company-selection-wrap-around t)
-  :hook (after-init . global-company-mode))
-
 (use-package markdown-mode
-  :straight t
   :mode (("\.md$" . markdown-mode)))
 
 (use-package all-the-icons
   :ensure t)
 
-;; Theme
-(use-package solo-jazz-theme
-   :ensure t
-   :config
-   (load-theme 'solo-jazz t))
-
-;; Modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-
-;; Project organization
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1)
-  (setq projectile-project-search-path '("~/git/")
-	;; projectile-switch-project-action 'neotree-projectile-action
-	projectile-indexing-method 'alien
-	projectile-use-git-grep 1))
-
-;; Incremental completions
-(use-package helm
-  :straight t
-  :diminish
-  :bind (("C-h a"   . helm-apropos)
-         ("C-x b"   . helm-mini)
-         ("C-x C-b" . helm-buffers-list)
-         ("C-x C-m" . helm-M-x)
-         ("C-x m"   . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-r" . helm-recentf)
-         ("C-x r l" . helm-filtered-bookmarks)
-         ("C-x r b" . helm-filtered-bookmarks)
-         ("C-x i"   . helm-imenu)
-         ("M-y"     . helm-show-kill-ring)
-         ("M-i"     . helm-swoop-without-pre-input)
-         ("M-I"     . helm-swoop-back-to-last-point)
-         ("C-c M-i" . helm-multi-swoop)
-         ("C-x M-i" . helm-multi-swoop-all))
-  :bind (:map helm-map
-              ("<tab>" . helm-execute-persistent-action)
-              ("C-z"   . helm-select-action))
-  :config
-  (setq helm-ff-transformer-show-only-basename nil
-        helm-external-programs-associations '(("zip" . "unzip")
-                                              ("mp4" . "mpv")
-                                              ("mkv" . "mpv")
-                                              ("docx" . "libreoffice"))
-        helm-completion-style 'emacs
-        helm-yank-symbol-first                 t
-        helm-move-to-line-cycle-in-source      t
-        helm-buffers-fuzzy-matching            t
-        helm-ff-auto-update-initial-value      t
-        helm-imenu-fuzzy-match                 t
-        helm-buffer-max-length                 50
-        helm-ff-candidate-number-limit         200
-        helm-display-buffer-width              90
-        helm-display-function                  'helm-default-display-buffer
-        helm-display-buffer-reuse-frame        t
-        helm-use-undecorated-frame-option      t
-        helm-show-completion-display-function #'helm-show-completion-default-display-function)
-  (helm-mode 1)
-  (helm-adaptive-mode 1)
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (eshell-cmpl-initialize)
-              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-              (define-key eshell-hist-mode-map
-                          [remap eshell-previous-matching-input-from-input]
-                          'helm-eshell-history))))
-
 (use-package magit
-  :straight t
+  :ensure t
   :bind
   (("C-x g" . magit-status))
   :config
-  (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1
-        magit-bury-buffer-function 'magit-restore-window-configuration))
+  ;; Exibe o buffer Magit em uma janela dedicada, ocupando a tela inteira
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  
+  ;; Fecha automaticamente o buffer Magit ao pressionar 'q'
+  (setq magit-bury-buffer-function #'magit-mode-quit-window))
+
+;; Projectile + magit
+(define-key projectile-mode-map (kbd "C-c p g") 'magit-status)
 
 (use-package forge
-  :straight t
   :after magit)
 
 (use-package git-timemachine
-  :straight t
   :after magit)
-
-(use-package perspective
-  :straight t
-  :custom
-  (persp-mode-prefix-key (kbd "C-x x"))
-  :config
-  (unless (default-value 'persp-mode)
-    (persp-mode +1))
-  (add-hook 'kill-emacs-hook #'persp-state-save)
-  (setq persp-state-default-file "~/.emacs.d/persp.state"))
-
-(use-package treemacs
-  :ensure t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
-          treemacs-deferred-git-apply-delay        0.5
-          treemacs-directory-name-transformer      #'identity
-          treemacs-display-in-side-window          t
-          treemacs-eldoc-display                   'simple
-          treemacs-file-event-delay                2000
-          treemacs-file-extension-regex            treemacs-last-period-regex-value
-          treemacs-file-follow-delay               0.2
-          treemacs-file-name-transformer           #'identity
-          treemacs-follow-after-init               t
-          treemacs-expand-after-init               t
-          treemacs-find-workspace-method           'find-for-file-or-pick-first
-          treemacs-git-command-pipe                ""
-          treemacs-goto-tag-strategy               'refetch-index
-          treemacs-header-scroll-indicators        '(nil . "^^^^^^")
-          treemacs-hide-dot-git-directory          t
-          treemacs-indentation                     2
-          treemacs-indentation-string              " "
-          treemacs-is-never-othe-window           nil
-          treemacs-max-git-entries                 5000
-          treemacs-missing-project-action          'ask
-          treemacs-move-forward-on-expand          nil
-          treemacs-no-png-images                   nil
-          treemacs-no-delete-other-windows         t
-          treemacs-project-follow-cleanup          nil
-          treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-          treemacs-position                        'left
-          treemacs-read-string-input               'from-child-frame
-          treemacs-recenter-distance               0.1
-          treemacs-recenter-after-file-follow      nil
-          treemacs-recenter-after-tag-follow       nil
-          treemacs-recenter-after-project-jump     'always
-          treemacs-recenter-after-project-expand   'on-distance
-          treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
-          treemacs-project-follow-into-home        nil
-          treemacs-show-cursor                     nil
-          treemacs-show-hidden-files               t
-          treemacs-silent-filewatch                nil
-          treemacs-silent-refresh                  nil
-          treemacs-sorting                         'alphabetic-asc
-          treemacs-select-when-already-in-treemacs 'move-back
-          treemacs-space-between-root-nodes        t
-          treemacs-tag-follow-cleanup              t
-          treemacs-tag-follow-delay                1.5
-          treemacs-text-scale                      nil
-          treemacs-user-mode-line-format           nil
-          treemacs-user-header-line-format         nil
-          treemacs-wide-toggle-width               70
-          treemacs-width                           35
-          treemacs-width-increment                 1
-          treemacs-width-is-initially-locked       t
-          treemacs-workspace-switch-cleanup        nil)
-
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
-
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode 'always)
-    (when treemacs-python-executable
-      (treemacs-git-commit-diff-mode t))
-
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple)))
-
-    (treemacs-hide-gitignored-files-mode nil))
-  :bind
-  (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
-
-(use-package treemacs-projectile
-  :after (treemacs projectile)
-  :ensure t)
-
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
-
-(use-package treemacs-magit
-  :after (treemacs magit)
-  :ensure t)
-
-(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-  :ensure t
-  :config (treemacs-set-scope-type 'Perspectives))
-
-(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-  :after (treemacs)
-  :ensure t
-  :config (treemacs-set-scope-type 'Tabs))
 
 ;; Which key helper to show keyboard options
 (use-package which-key
   :ensure t
   :config (which-key-mode))
 
-;; pdftools
-(use-package pdf-tools
-   :config
-       (pdf-tools-install)
-       (setq-default pdf-view-display-size 'fit-page)
-   :bind (:map pdf-view-mode-map
-         ("\\" . hydra-pdftools/body)
-         ("<s-spc>" .  pdf-view-scroll-down-or-next-page)
-         ("g"  . pdf-view-first-page)
-         ("G"  . pdf-view-last-page)
-         ("l"  . image-forward-hscroll)
-         ("h"  . image-backward-hscroll)
-         ("j"  . pdf-view-next-page)
-         ("k"  . pdf-view-previous-page)
-         ("e"  . pdf-view-goto-page)
-         ("u"  . pdf-view-revert-buffer)
-         ("al" . pdf-annot-list-annotations)
-         ("ad" . pdf-annot-delete)
-         ("aa" . pdf-annot-attachment-dired)
-         ("am" . pdf-annot-add-markup-annotation)
-         ("at" . pdf-annot-add-text-annotation)
-         ("y"  . pdf-view-kill-ring-save)
-         ("i"  . pdf-misc-display-metadata)
-         ("s"  . pdf-occur)
-         ("b"  . pdf-view-set-slice-from-bounding-box)
-         ("r"  . pdf-view-reset-slice)))
+;; flycheck syntax checker
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
-(use-package org-pdftools
-  :hook (org-mode . org-pdftools-setup-link))
+;; Modeline
+(use-package doom-modeline
+  :ensure t
+  :after flycheck
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 3)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-minor-modes nil)
+  :config
+  (setq doom-modeline-check-simple-format t))
 
 ;; email config
 ;; load mu4e from the installation path.
@@ -551,7 +312,7 @@ NAME and ARGS are as in `use-package'."
 ;; this can be left alone
 (require 'epa-file)
 (epa-file-enable)
-(setq epa-pinentry-mode 'loopback)
+(setq epg-pinentry-mode 'loopback)
 (auth-source-forget-all-cached)
 
 ;; don't keep message compose buffers around after sending:
@@ -655,54 +416,25 @@ NAME and ARGS are as in `use-package'."
 ;; (define-key mu4e-headers-mode-map (kbd "<right>")   'mu4e-headers-unfold-at-point)
 ;; (define-key mu4e-headers-mode-map (kbd "<S-right>") 'mu4e-headers-unfold-all)
 
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode 1))
-
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
-
-;; hydra
-(use-package hydra :ensure t)
-
-;; flycheck syntax checker
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-
-;;; Tree-sitter support
-;; https://git.savannah.gnu.org/cgit/emacs.git/tree/admin/notes/tree-sitter/starter-guide?h=emacs-29
-(use-package treesit
-  :when (and (fboundp 'treesit-available-p)
-             (treesit-available-p))
-  :custom (major-mode-remap-alist
-           '((c-mode          . c-ts-mode)
-             (c++-mode        . c++-ts-mode)
-             (csharp-mode     . csharp-ts-mode)
-             (conf-toml-mode  . toml-ts-mode)
-             (css-mode        . css-ts-mode)
-             (java-mode       . java-ts-mode)
-             (javascript-mode . js-ts-mode)
-             (js-json-mode    . json-ts-mode)
-             (python-mode     . python-ts-mode)
-             (ruby-mode       . ruby-ts-mode)
-             (sh-mode         . bash-ts-mode)
-	     (org-mode        . org-ts-mode)
-
-	     ))
-
-  :config
-  (add-to-list 'auto-mode-alist '("\\(?:CMakeLists\\.txt\\|\\.cmake\\)\\'" . cmake-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode)))
-
 ;; start the initial frame maximized
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (setq vc-follow-symlinks t)
 
 (provide 'init)
+
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" default))
+ '(package-selected-packages
+   '(doom-modeline which-key vterm solarized-theme shrink-path projectile nerd-icons flycheck exec-path-from-shell centaur-tabs all-the-icons)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
