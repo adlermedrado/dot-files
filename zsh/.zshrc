@@ -22,4 +22,4 @@ alias ls="ls -G"
 alias vim='nvim'
 
 # Created by `pipx` on 2024-08-07 22:44:29
-export PATH="$PATH:/Users/amedrado/.local/bin"
+export PATH="$PATH:/Users/amedrado/.config/emacs/bin:/Users/amedrado/.local/bin"

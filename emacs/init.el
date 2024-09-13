@@ -201,6 +201,19 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package tree-sitter
+  :ensure t
+  :hook ((python-mode . tree-sitter-mode)
+         (js-mode . tree-sitter-mode)
+      	 (markdown-mode . tree-sitter-mode)
+	 (emacs-lisp-mode . tree-sitter-mode))
+  :config
+  (require 'tree-sitter-langs))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+
 ;; Modeline
 (use-package doom-modeline
   :ensure t
@@ -214,6 +227,82 @@
   (doom-modeline-minor-modes nil)
   :config
   (setq doom-modeline-check-simple-format t))
+
+;; Treemacs
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (use-package treemacs-projectile
+    :after (treemacs projectile)
+    :ensure t)
+  :bind
+  (("C-x t t" . treemacs)
+   ("C-x t p" . treemacs-projectile)))
+
+;;(global-set-key (kbd "C-x t t") 'abm/treemacs-project-toggle)
+
+;; Abre Treemacs no diretório do projeto atual
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t
+  :config
+  (setq treemacs-follow-mode t))
+
+(use-package lsp-treemacs
+  :ensure t
+  :config
+  (lsp-treemacs-sync-mode 1)
+  (define-key lsp-mode-map (kbd "C-c l t") 'lsp-treemacs-symbols))
+
+(use-package treemacs-magit
+  :ensure t
+  :after (treemacs magit)
+  :config
+  (setq treemacs-git-mode 'deferred))
+
+(use-package treemacs-all-the-icons
+  :ensure t
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((python-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         )
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-enable-snippet t)
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-idle-delay 0.500))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-sideline-enable t)
+  (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-position 'at-point)
+  (setq lsp-ui-doc-delay 0.2)
+  (setq lsp-ui-peek-enable t)
+  (setq lsp-ui-peek-always-show t)
+  (setq lsp-ui-peek-fontify 'always))
+
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  :hook (prog-mode . company-mode))
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
 
 ;; email config
 ;; load mu4e from the installation path.
