@@ -8,8 +8,6 @@ eval "$(starship init zsh)"
 # Enable colors on ls command
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-alias ls='ls --color=auto'
-alias ll='ls -latr'
 
 # load fzf
 source <(fzf --zsh)
@@ -21,6 +19,10 @@ alias tat="tmux attach -t "
 alias tls="tmux ls"
 alias ls="ls -G"
 alias vim='nvim'
+alias ls='ls --color=auto'
+alias ll='ls -latr --color=auto'
+alias ss='nvim $(fzf -m --preview="bat --color=always {}")'
+
 
 neofetch
 
