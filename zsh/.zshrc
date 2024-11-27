@@ -2,7 +2,7 @@ fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 # starship config
-# export STARSHIP_CONFIG=~/code/dot-files/starship.toml
+export STARSHIP_CONFIG=~/code/dot-files/starship.toml
 eval "$(starship init zsh)"
 
 # Enable colors on ls command
