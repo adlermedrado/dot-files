@@ -63,3 +63,7 @@ map \b <Action>(ToggleLineBreakpoint)
 map <leader>f <Action>(GotoFile)
 map <leader>g <Action>(FindInPath)
 map <leader>b <Action>(Switcher)
+
+" Open Terminal
+nmap <Leader>t :action ActivateTerminalToolWindow<CR>
+
